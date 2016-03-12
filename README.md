@@ -64,3 +64,4 @@ You can access Nginx and Symfony application logs in the following directories i
 
 You can also use Kibana to visualize Nginx & Symfony logs by visiting `http://symfony.dev:81`.
 # brunch
+# brunch
