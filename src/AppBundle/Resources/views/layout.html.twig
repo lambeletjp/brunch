@@ -22,9 +22,12 @@
         {% javascripts
         'assets/vendor/jquery/dist/jquery.min.js'
         'assets/vendor/bootstrap/js/bootstrap.min.js'
+        '@AppBundle/Resources/public/js/script.js'
         output='js/compiled/app.js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkhzc4BU9taPBAtWhFsgvzYuiDCK2ieTY"
+                async defer></script>
     {% endblock %}
 </div>
 </body>

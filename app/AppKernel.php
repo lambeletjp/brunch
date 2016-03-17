@@ -17,7 +17,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new AppBundle\AppBundle()
+            new AppBundle\AppBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
 
         ];
 

@@ -1,0 +1,52 @@
+# in local environment use only unicast in order to prevent joining other clusters
+# on machines of team members.
+
+discovery.zen.ping.timeout: 3s
+discovery.zen.ping.multicast.enabled: false
+
+
+# For demo and test purposes no cluster and no replicas are needed.
+# This setting can be overridden using parameters of the engine within the configuration for a site.
+#index.number_of_shards: 1
+#index.number_of_replicas: 0
+
+#path.logs: ../../logs
+#path.data: ../../data/elasticsearch
+
+index :
+  analysis :
+    analyzer :
+      default :
+        type : custom
+        tokenizer : whitespace
+        filter : [stopFilter, lowercase, word_delimiter, asciifolding, german_snowball]
+      textAnalyzer :
+        type : custom
+        tokenizer : whitespace
+        filter : [stopFilter, lowercase, word_delimiter, asciifolding, mynGram]
+      stemmedTextAnalyzer :
+        type : custom
+        tokenizer : whitespace
+        filter : [stopFilter, lowercase, word_delimiter, asciifolding, german_snowball]
+      commaListAnalyzer :
+        type : custom
+        tokenizer: separatedListTokenizer
+        filter : [trim, lowercase, unique]
+    tokenizer :
+      separatedListTokenizer :
+        type : pattern
+        pattern: (,)|(;)
+    filter :
+      stopFilter :
+        type : stop
+        stopwords : [aber,als,am,an,auch,auf,aus,bei,bin,bis,ist,da,dadurch,daher,darum,das,daß,dass,dein,deine,dem,den,der,des,dessen,deshalb,die,dies,dieser,dieses,doch,dort,du,durch,ein,eine,einem,einen,einer,eines,er,es,euer,eure,für,hatte,hatten,hattest,hattet,hier,hinter,ich,ihr,ihre,im,in,ist,ja,jede,jedem,jeden,jeder,jedes,jener,jenes,jetzt,kann,kannst,können,könnt,machen,mein,meine,mit,muß,mußt,musst,müssen,müßt,nach,nachdem,nein,nun,oder,seid,sein,seine,sich,sie,sind,soll,sollen,sollst,sollt,sonst,soweit,sowie,über,und,unser,unsere,unter,vom,von,vor,wann,warum,was,weiter,weitere,wenn,wer,werde,werden,werdet,weshalb,wie,wieder,wieso,wir,wird,wirst,wo,woher,wohin,zu,zum,zur]
+        ignore_case : true
+      german_snowball :
+        type : snowball
+        language : German
+      mynGram:
+        type: edgeNGram
+        min_gram: 3
+        max_gram: 20
+        token_chars: [letter, digit]
+
