@@ -1,4 +1,6 @@
-function initMap(pos) {
+function initMap() {
+    var coords = {'latitude':53.548805,'longitude':9.995161};
+    var pos = {'coords':coords};
     var crd = pos.coords;
     var mapDiv = document.getElementById('map');
     var map = new google.maps.Map(mapDiv, {
@@ -15,10 +17,4 @@ function error(){
 
 $( document ).ready(function() {
 
-    var optionsGeoLocation = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0
-    };
-    navigator.geolocation.getCurrentPosition(initMap, error, optionsGeoLocation);
 });

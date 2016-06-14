@@ -68,12 +68,6 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-assetic:
-    debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
-    filters:
-        cssrewrite: ~
-
 
 fos_rest:
     param_fetcher_listener: true

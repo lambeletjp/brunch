@@ -21,7 +21,7 @@ class PlaceController extends Controller
 {
 
     /**
-     * @Route("/form", name="place_form")
+     * @Route("/newPlace", name="place_form")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
