@@ -4,7 +4,16 @@
 {% block title %}Brunch{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_end(form) }}
+    <div class="container">
+        <row>
+            <h2>Add a new location</h2>
+        </row>
+        <row>
+            {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+            {# {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %} #}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </row>
+    </div>
 {% endblock %}

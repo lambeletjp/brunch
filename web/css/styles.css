@@ -9,6 +9,12 @@ p {
     background-image:url('../img/bg.png');
     background-repeat:repeat;
 }
+
+.header-image {
+    background-image:url('../img/Header/brunchHeader.jpg');
+    height: 300px;
+}
+
 .jumbotron {
     background-color: transparent;
     padding: 70px 0 0 0;
