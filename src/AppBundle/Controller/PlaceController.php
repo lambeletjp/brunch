@@ -74,4 +74,25 @@ class PlaceController extends Controller
     {
         return $this->formPlaceAction($request);
     }
+
+    /**
+     * @Route("/find-location", name="place_success")
+     * @method GET
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function findLocationAction(Request $request)
+    {
+
+        $address = $request->get('address');
+
+        /** @var \Geocoder\Model\AddressCollection $addressCollection */
+        $addressCollection = $this->getDoctrine()
+            ->getRepository('AppBundle:Place')
+            ->getGoogleAddress($address);
+
+        $currentAddress = $addressCollection->first();
+
+        return $this->render('AppBundle:Place:findLocation.html.twig',['currentAddress' => $currentAddress]);
+    }
 }

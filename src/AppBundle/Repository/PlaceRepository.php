@@ -15,9 +15,14 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getAddressCollection(Place $place)
     {
+        return $this->getGoogleAdresse($place->getGoogleAddress());
+    }
+
+    public function getGoogleAddress($address)
+    {
         $curl     = new CurlHttpAdapter();
         $geocoder = new GoogleMaps($curl);
-        return $geocoder->geocode($place->getAddress());
+        return $geocoder->geocode($address);
     }
 
     public function geoFormat(Array $places){
