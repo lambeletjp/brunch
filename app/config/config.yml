@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -37,6 +37,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+    - 'VichUploaderBundle:Form:fields.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -86,3 +88,19 @@ fos_rest:
         default_engine: twig
     routing_loader:
         default_format: json
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        place_image:
+          uri_prefix:         /images/places
+          namer:              vich_uploader.namer_uniqid
+          upload_destination: '%kernel.root_dir%/../web/images/places'
+          inject_on_load:     false
+          delete_on_update:   true
+          delete_on_remove:   true

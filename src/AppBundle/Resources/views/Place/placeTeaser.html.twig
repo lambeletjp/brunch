@@ -1,0 +1,11 @@
+<div class="col-xs-12 col-lg-3 col-md-3 place-teaser">
+    <a href="{{ path('place', {'slug': place.slug,'id': place.id}) }}">
+        <div>
+            <img src="http://lorempixel.com/{{600 + random(100)}}/{{600 + random(100)}}/food">
+            <div class="place-description">
+                <h3>{{ place.name }}</h3>
+                <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city}}</p>
+            </div>
+        </div>
+    </a>
+</div>

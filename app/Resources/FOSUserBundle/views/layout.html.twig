@@ -1,0 +1,9 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Demo Application{% endblock %}
+
+{% block body %}
+    <div class="container">
+    {% block fos_user_content %}{% endblock %}
+    </div>
+{% endblock %}

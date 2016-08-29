@@ -1,13 +1,30 @@
 body {
-    background-image:url('../img/bg.png');
-    background-repeat:repeat;
+    /*background-image:url('../img/bg.png');*/
+    /*background-repeat:repeat;*/
 }
 p {
     margin: 0 0 20px;
 }
+
+a,a:visited,a:hover,a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
 .navbar {
-    background-image:url('../img/bg.png');
-    background-repeat:repeat;
+    background-color: beige;
+}
+
+
+@media (max-width: 768px) {
+    .navbar-brand  {
+        font-size: 20px;
+    }
+}
+
+.navbar-header img{
+    height: 40px;
+    margin-top: 15px;
 }
 
 .header-image {
@@ -35,3 +52,28 @@ p {
     color: #2a6496;
 }
 
+.place-teaser img{
+    max-width: 100%;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.place-teaser {
+    padding: 20px;
+}
+
+.place-teaser div{
+    background-color: beige;
+    margin: 10px;
+}
+
+.list-places {
+    margin-top: 20px;
+}
+
+.place-description{
+    padding: 10px;
+    height: 180px;
+}

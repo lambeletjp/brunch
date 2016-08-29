@@ -21,6 +21,28 @@ class PlaceController extends Controller
 {
 
     /**
+     * @Route("/place/{slug}-{id}",
+     *          requirements={
+     *              "slug" = "[^/]+",
+     *              "id" = "\d+"},
+     *          name="place")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function placeAction($slug, $id, Request $request)
+    {
+        $place = $this->getDoctrine()->getRepository('AppBundle:Place')->findOneBy(['id' => $id],null,10);
+        if(!$place){
+            throw $this->createNotFoundException('404 - Seite nicht gefunden');
+        }
+        if($place->getSlug() != $slug){
+            $redirectUrl = $this->generateUrl('place',['id' => $place->getId(),'slug' => $place->getSlug()]);
+            return $this->redirect($redirectUrl);
+        }
+        return $this->render('AppBundle:Place:place.html.twig',['place' => $place]);
+    }
+
+    /**
      * @Route("/newPlace", name="place_form")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
@@ -76,7 +98,7 @@ class PlaceController extends Controller
     }
 
     /**
-     * @Route("/find-location", name="place_success")
+     * @Route("/find-location", name="find-location")
      * @method GET
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -95,4 +117,6 @@ class PlaceController extends Controller
 
         return $this->render('AppBundle:Place:findLocation.html.twig',['currentAddress' => $currentAddress]);
     }
+
+
 }
