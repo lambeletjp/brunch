@@ -9,9 +9,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Place;
+use AppBundle\Entity\PlaceImage;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,7 +41,13 @@ class PlaceController extends Controller
             $redirectUrl = $this->generateUrl('place',['id' => $place->getId(),'slug' => $place->getSlug()]);
             return $this->redirect($redirectUrl);
         }
-        return $this->render('AppBundle:Place:place.html.twig',['place' => $place]);
+
+        $placeImages = $this->getDoctrine()->getRepository('AppBundle:Place')->findAll(['placeId' => $id]);
+
+        return $this->render('AppBundle:Place:place.html.twig',[
+            'place' => $place,
+            'placeImages' => $placeImages
+        ]);
     }
 
     /**
@@ -56,6 +64,15 @@ class PlaceController extends Controller
             ->add('address', TextType::class)
             ->add('postalCode', NumberType::class)
             ->add('city', TextType::class)
+            ->add('images',FileType::class,array(
+                "label" => "Image",
+                "required" => FALSE,
+                "attr" => array(
+                    "accept" => "image/*",
+                    "multiple" => "multiple",
+                ),
+                'data_class' => null
+            ))
             ->add('save', SubmitType::class, array('label' => 'Create Place'))
             ->getForm();
 
@@ -76,25 +93,30 @@ class PlaceController extends Controller
                 $em->flush();
             }
 
+            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
+            foreach ($place->getImages() as $image) {
+                $imageName = md5(uniqid()).'.'.$image->guessExtension();
+                $image->move(
+                    $this->getParameter('placeImage_directory'),
+                    $imageName
+                );
+                $placeImage = new PlaceImage();
+                $placeImage->setImageName($imageName);
+                $placeImage->setPlaceId($place->getId());
+                $em->persist($placeImage);
+                $em->flush();
+            }
 
 
-            return $this->redirectToRoute('place_success');
+
+            $redirectUrl = $this->generateUrl('place',['id' => $place->getId(),'slug' => $place->getSlug()]);
+            return $this->redirect($redirectUrl);
         }
 
         return $this->render('AppBundle:Place:form.html.twig'
             , array(
                 'form' => $form->createView(),
             ));
-    }
-
-    /**
-     * @Route("/form/success", name="place_success")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     */
-    public function newPlaceAction(Request $request)
-    {
-        return $this->formPlaceAction($request);
     }
 
     /**

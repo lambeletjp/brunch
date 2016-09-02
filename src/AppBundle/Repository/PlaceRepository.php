@@ -15,7 +15,7 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getAddressCollection(Place $place)
     {
-        return $this->getGoogleAddress($place->getGoogleAdress());
+        return $this->getGoogleAddress($place->getGoogleAddress());
     }
 
     public function getGoogleAddress($address)
