@@ -33,6 +33,7 @@ class PlaceController extends Controller
      */
     public function placeAction($slug, $id, Request $request)
     {
+        $id = intval($id);
         $place = $this->getDoctrine()->getRepository('AppBundle:Place')->findOneBy(['id' => $id],null,10);
         if(!$place){
             throw $this->createNotFoundException('404 - Seite nicht gefunden');
@@ -42,7 +43,7 @@ class PlaceController extends Controller
             return $this->redirect($redirectUrl);
         }
 
-        $placeImages = $this->getDoctrine()->getRepository('AppBundle:Place')->findAll(['placeId' => $id]);
+        $placeImages = $this->getDoctrine()->getRepository('AppBundle:PlaceImage')->findBy(['placeId' => $id]);
 
         return $this->render('AppBundle:Place:place.html.twig',[
             'place' => $place,

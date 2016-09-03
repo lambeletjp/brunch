@@ -5,16 +5,27 @@
 
 {% block body %}
 
-{{ dump(place) }}
+
+
 
 <div class="container">
     <div>
-        <img src="http://lorempixel.com/{{random(1000)}}/{{random(1000)}}/food">
+        <ol id="carousel_images">
+        {% for placeImage in placeImages %}
+            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
+            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
+            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
+            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
+            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
+        {% endfor %}
+        </ol>
         <div>
             <h3>{{ place.name }}</h3>
             <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city}}</p>
         </div>
     </div>
 </div>
+
+    
 
 {% endblock %}

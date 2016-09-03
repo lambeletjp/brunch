@@ -16,7 +16,18 @@ function error(){
     var pos = {'latitude' : 51, 'longitude' : 10};
     initMap(pos);
 }
-
 $( document ).ready(function() {
+    $(window).load(function () {
+        console.log('read');
+        $("#carousel_images").flexisel({
+            clone: false,
+            visibleItems: 4
+        });
+    });
+});
 
+
+
+$(window).load(function() {
+    console.log('loaded');
 });
