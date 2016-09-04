@@ -7,3 +7,13 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    admin.place:
+        class: AppBundle\Admin\PlaceAdmin
+        arguments: [~, AppBundle\Entity\Place, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: Place }
+    admin.placeImage:
+        class: AppBundle\Admin\PlaceImageAdmin
+        arguments: [~, AppBundle\Entity\PlaceImage, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: PlaceImage }
