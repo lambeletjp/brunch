@@ -1,0 +1,83 @@
+{% extends 'KPhoenSandboxBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }} - Propel{% endblock %}
+
+{% block body %}
+<div class="container content-section">
+    <div class="row">
+        <div class="col-lg-10 col-sm-12">
+            <hr class="section-heading-spacer">
+            <div class="clearfix"></div>
+
+            <h1 class="section-heading">Propel + Flysystem + Admingenerator</h1>
+
+            <p>
+                The <a href="https://github.com/K-Phoen/Vich-Uploader-Sandbox/tree/propel-admingen"><i>propel-admingen</i></a> branch of the repository showcases the integration of <a href="http://propelorm.org/">Propel</a>,
+                <a href="https://github.com/thephpleague/flysystem">Flysystem</a> and <a href="https://github.com/symfony2admingenerator/AdmingeneratorGeneratorBundle">AdmingeneratorGeneratorBundle</a>
+                in <a href="https://github.com/dustin10/VichUploaderBundle">VichUploaderBundle</a>.
+            </p>
+
+            <p>
+                <a href="http://propel-admingen.k-phoen.vich-uploader-sandbox.stage1.io/" class="btn btn-info"><i class="fa fa-rocket fa-fw"></i> See it live</a>
+            </p>
+
+            <h2>What's inside?</h2>
+
+            <p>
+                The following common situations are implemented:
+                <ul>
+                    <li><a href="#oneToOne">OneToOne relationship</a>: one entity = one uploadable image ;</li>
+                    <li><a href="#oneToSeveral">OneToSeveral relationship</a>: each entity has exactly <i>X</i> uploadable images (where <i>X</i> is known).</li>
+                    <li><a href="#oneToMany">OneToMany relationship</a>: one entity = <i>X</i> uploadable images, where <i>X</i> can be different from one entity to another.</li>
+                </ul>
+            </p>
+
+            <h3>Mapping definitions</h3>
+
+            <p>
+                In this application, all VichUploader <b>mappings definitions are done in XML</b>.<br />
+                You'll find a file per uploadable entity, each one of this files being stored in the
+                <code>Resources/config/vich_uploader</code> folder of the bundle it belongs to.
+            </p>
+
+            <h3 id="oneToOne">OneToOne relationship</h3>
+
+            <p>
+                The <code>KPhoen\SingleUploadableBundle\Model\Image</code>
+                implements this kind of relation: each <em>Image</em> entity
+                represents exactly one uploadable file.
+            </p>
+
+            <p>
+                The integration with AdminGeneratorBundle can be found in the <code>src/KPhoen/SingleUploadableBundle/Resources/config/Image-generator.yml</code> file.
+            </p>
+
+            <h3 id="oneToSeveral">OneToSeveral relationship</h3>
+
+            <p>
+                The <code>KPhoen\MultipleUploadableBundle\Model\Car</code>
+                implements this kind of relation. Each <em>Car</em> entity has
+                exactly two uploadable fields.
+            </p>
+
+            <p>
+                The integration with AdminGeneratorBundle can be found in the <code>src/KPhoen/MultipleUploadableBundle/Resources/config/Car-generator.yml</code> file.
+            </p>
+
+            <h3 id="oneToMany">OneToMany relationship</h3>
+
+            <p>
+                The <code>KPhoen\MultipleUploadableBundle\Model\Bike</code>
+                implements this kind of relation. Each <em>Bike</em> entity has
+                an unknown number of <code>KPhoen\Bundle\MultipleUploadableBundle\Model\BikeImage</code>.<br />
+                To achieve this, we setup a Propel OneToMany relation between <em>Bike</em> and <em>BikeImage</em>.
+                The latter represents an image associated to a <em>Bike</em> and we fall back to the OneToOne case.
+            </p>
+
+            <p>
+                The integration with AdminGeneratorBundle can be found in the <code>src/KPhoen/MultipleUploadableBundle/Resources/config/Bike-generator.yml</code> file.
+            </p>
+        </div>
+    </div>
+</div><!-- /.container -->
+{% endblock %}

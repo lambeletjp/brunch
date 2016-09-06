@@ -303,10 +303,18 @@ class Place
         $image->setPlace(null);
     }
 
-    public function setImages($image){
+    public function setImage($image){
         if(!$image) return;
         /** UploadedFile $image */
         $this->images[] = $image;
+    }
+
+    public function getImage(){
+        return reset($this->images);
+    }
+
+    public function setImages($images){
+        $this->images = $images;
     }
 
     /**

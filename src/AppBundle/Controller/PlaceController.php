@@ -65,7 +65,7 @@ class PlaceController extends Controller
             ->add('address', TextType::class)
             ->add('postalCode', NumberType::class)
             ->add('city', TextType::class)
-            ->add('images',FileType::class,array(
+            ->add('image',FileType::class,array(
                 "label" => "Image",
                 "required" => FALSE,
                 "attr" => array(

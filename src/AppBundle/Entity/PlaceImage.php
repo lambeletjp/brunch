@@ -50,6 +50,9 @@ class PlaceImage
      */
     protected $placeId;
 
+
+    protected $imageUrl = 'uploads/placesImages/';
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime("now");
@@ -102,6 +105,11 @@ class PlaceImage
     {
         $this->placeId = $placeId;
     }
+
+    public function getImageUrl(){
+        return '/'.$this->imageUrl.$this->imageName;
+    }
+
 
 }
 

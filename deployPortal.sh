@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 composer install
-php app/console cache:clear
-php app/console cache:clear -e prod
-php app/console assets:install
+php bin/console cache:clear
+php bin/console cache:clear -e prod
+php bin/console assets:install

@@ -5,18 +5,11 @@
 
 {% block body %}
 
-
-
-
 <div class="container">
     <div>
         <ol id="carousel_images">
         {% for placeImage in placeImages %}
-            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
-            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
-            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
-            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
-            <li><img src="/uploads/placesImages/079a073a3dbab7ee4c30d8fb3d92ebb3.png"></li>
+            <li><img src="{{placeImage.imageUrl }}"></li>
         {% endfor %}
         </ol>
         <div>
@@ -25,7 +18,5 @@
         </div>
     </div>
 </div>
-
-    
 
 {% endblock %}
