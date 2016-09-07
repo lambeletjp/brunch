@@ -17,3 +17,9 @@ _sonata_admin:
 admin_area:
     resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
     prefix: /admin
+
+fos_comment_api:
+    type: rest
+    resource: "@FOSCommentBundle/Resources/config/routing.yml"
+    prefix: /api
+    defaults: { _format: html }

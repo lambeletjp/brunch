@@ -99,3 +99,11 @@ sonata_block:
         # enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts: [admin]
+
+fos_comment:
+    db_driver: orm
+    class:
+        model:
+            comment: AppBundle\Entity\Comment
+            thread: AppBundle\Entity\Thread
+            vote: AppBundle\Entity\Vote
