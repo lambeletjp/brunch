@@ -104,6 +104,9 @@ fos_comment:
     form:
       comment:
         type:  AppBundle\Form\Type\CommentType
+    service:
+      sorting:
+        default: date_asc
     db_driver: orm
     class:
         model:
