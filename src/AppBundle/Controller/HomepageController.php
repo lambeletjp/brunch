@@ -25,13 +25,6 @@ class HomepageController extends Controller
     public function indexAction(Request $request)
     {
         $places = $this->getDoctrine()->getRepository('AppBundle:Place')->findBy([],null,10);
-
-        /** @var \AppBundle\Entity\Place $place */
-        foreach($places as $place){
-            $images = $this->getDoctrine()->getRepository('AppBundle:PlaceImage')->findBy(['placeId' => $place->getId()]);
-            $place->setImages($images);
-        }
-
         return $this->render('AppBundle:Homepage:homepage.html.twig',['places' => $places]);
     }
 }

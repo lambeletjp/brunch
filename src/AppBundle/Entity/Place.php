@@ -2,11 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Place
@@ -84,6 +86,8 @@ class Place
     private $longitude;
 
     /**
+     *
+     * @OneToMany(targetEntity="Image", mappedBy="place",cascade={"persist"})
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $images;
@@ -117,7 +121,7 @@ class Place
      */
     public function __construct()
     {
-        $this->images = array();
+        $this->images = new ArrayCollection();
         $this->updatedAt = new \DateTime("now");
         $this->createdAt = new \DateTime("now");
     }
@@ -278,53 +282,32 @@ class Place
         $this->longitude = $longitude;
     }
 
-
     /**
-     * Add images
+     * Add placeImagess
      *
-     * @param PlaceImage $image
+     * @param Image $image
      * @return Place
      */
-    public function addImage(PlaceImage $image)
+    public function addImage(Image $image)
     {
         $this->images[] = $image;
-        $image->setPlace($this);
+        $images[] = $image;
 
         return $this;
-    }
-
-    /**
-     * Remove images
-     * @param PlaceImage $image
-     */
-    public function removeImage(PlaceImage $image)
-    {
-        $this->images->removeElement($image);
-        $image->setPlace(null);
-    }
-
-    public function setImage($image){
-        if(!$image) return;
-        /** UploadedFile $image */
-        $this->images[] = $image;
-    }
-
-    public function getImage(){
-        return reset($this->images);
     }
 
     public function setImages($images){
         $this->images = $images;
     }
 
-    /**
-     * Get images
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getImages()
-    {
+    public function getImages(){
         return $this->images;
+    }
+
+    public function getImageTeaser(){
+        foreach($this->images as $image){
+
+        }
     }
 
     /**

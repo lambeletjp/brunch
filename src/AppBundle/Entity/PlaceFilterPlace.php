@@ -24,13 +24,6 @@ class PlaceFilterPlace
     /**
      * @var int
      *
-     * @ORM\Column(name="placeId", type="integer")
-     */
-    private $placeId;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="placeFilterId", type="integer")
      */
     private $placeFilterId;
@@ -51,30 +44,6 @@ class PlaceFilterPlace
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set placeId
-     *
-     * @param integer $placeId
-     *
-     * @return PlaceFilterPlace
-     */
-    public function setPlaceId($placeId)
-    {
-        $this->placeId = $placeId;
-
-        return $this;
-    }
-
-    /**
-     * Get placeId
-     *
-     * @return int
-     */
-    public function getPlaceId()
-    {
-        return $this->placeId;
     }
 
     /**

@@ -12,8 +12,20 @@
             {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
             {# {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %} #}
             {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+            {# render the task's only field: description #}
+            {{ form_row(form.name) }}
+            {{ form_row(form.address) }}
+            {{ form_row(form.postalCode) }}
+            {{ form_row(form.city) }}
+            <div class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+            </div>
+            {{ form_row(form.save) }}
         </row>
     </div>
+
+<script>
+
+</script>
+
+
 {% endblock %}

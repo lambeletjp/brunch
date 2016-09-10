@@ -13,23 +13,20 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class PlaceImageAdmin extends AbstractAdmin
+class ImageAdmin extends AbstractAdmin
 {
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper->add('imageName', 'text');
-        $formMapper->add('placeId', 'integer');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper->add('imageName');
-        $datagridMapper->add('placeId');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper->addIdentifier('imageName');
-        $listMapper->addIdentifier('placeId');
     }
 }

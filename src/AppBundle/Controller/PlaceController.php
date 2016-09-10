@@ -8,8 +8,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Image;
 use AppBundle\Entity\Place;
 use AppBundle\Entity\PlaceImage;
+use AppBundle\Form\Type\ImageType;
+use AppBundle\Form\Type\PlaceType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -43,11 +47,9 @@ class PlaceController extends Controller
             return $this->redirect($redirectUrl);
         }
 
-        $placeImages = $this->getDoctrine()->getRepository('AppBundle:PlaceImage')->findBy(['placeId' => $id]);
-
         return $this->render('AppBundle:Place:place.html.twig',[
             'place' => $place,
-            'placeImages' => $placeImages
+            'placeImages' => []
         ]);
     }
 
@@ -60,22 +62,7 @@ class PlaceController extends Controller
     {
         $place = new Place();
 
-        $form = $this->createFormBuilder($place)
-            ->add('name', TextType::class)
-            ->add('address', TextType::class)
-            ->add('postalCode', NumberType::class)
-            ->add('city', TextType::class)
-            ->add('image',FileType::class,array(
-                "label" => "Image",
-                "required" => FALSE,
-                "attr" => array(
-                    "accept" => "image/*",
-                    "multiple" => "multiple",
-                ),
-                'data_class' => null
-            ))
-            ->add('save', SubmitType::class, array('label' => 'Create Place'))
-            ->getForm();
+        $form = $this->createForm(PlaceType::class);
 
         $form->handleRequest($request);
 
@@ -90,25 +77,21 @@ class PlaceController extends Controller
                 $place->setLongitude($address->getLongitude());
                 $place->setLatitude($address->getLatitude());
                 $em = $this->getDoctrine()->getManager();
+                /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
+                if ($image = $place->getImages()) {
+                    $place->setImages(new ArrayCollection());
+                    $imageName = md5(uniqid()).'.'.$image->guessExtension();
+                    $image->move(
+                        $this->getParameter('placeImage_directory'),
+                        $imageName
+                    );
+                    $placeImage = new Image();
+                    $placeImage->setImageName($imageName);
+                    $place->addImage($placeImage);
+                }
                 $em->persist($place);
                 $em->flush();
             }
-
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
-            foreach ($place->getImages() as $image) {
-                $imageName = md5(uniqid()).'.'.$image->guessExtension();
-                $image->move(
-                    $this->getParameter('placeImage_directory'),
-                    $imageName
-                );
-                $placeImage = new PlaceImage();
-                $placeImage->setImageName($imageName);
-                $placeImage->setPlaceId($place->getId());
-                $em->persist($placeImage);
-                $em->flush();
-            }
-
-
 
             $redirectUrl = $this->generateUrl('place',['id' => $place->getId(),'slug' => $place->getSlug()]);
             return $this->redirect($redirectUrl);

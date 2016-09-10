@@ -3,14 +3,16 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToOne;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * PlaceImage
  *
- * @ORM\Table(name="place_image")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PlaceImageRepository")
+ * @ORM\Table(name="image")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ImageRepository")
  */
-class PlaceImage
+class Image
 {
     /**
      * @var int
@@ -44,15 +46,20 @@ class PlaceImage
     private $createdAt;
 
     /**
-     * @ORM\Column(type="integer")
      *
-     * @var integer
+     * @ManyToOne(targetEntity="Place", inversedBy="images")
+     * @JoinColumn(name="place_id", referencedColumnName="id")
+     *
      */
-    protected $placeId;
+    protected $place;
 
 
     protected $imageUrl = 'uploads/placesImages/';
 
+    /**
+     * Image constructor.
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $uploadImage
+     */
     public function __construct()
     {
         $this->updatedAt = new \DateTime("now");
@@ -78,8 +85,7 @@ class PlaceImage
     {
         return $this->imageName;
     }
-
-
+    
     /**
      * Get id
      *
@@ -88,22 +94,6 @@ class PlaceImage
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPlaceId()
-    {
-        return $this->placeId;
-    }
-
-    /**
-     * @param int $placeId
-     */
-    public function setPlaceId($placeId)
-    {
-        $this->placeId = $placeId;
     }
 
     public function getImageUrl(){

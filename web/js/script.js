@@ -16,3 +16,21 @@ function error(){
     var pos = {'latitude' : 51, 'longitude' : 10};
     initMap(pos);
 }
+
+console.log('ici');
+var $collectionHolder;
+
+jQuery(document).ready(function() {
+    $collectionHolder = $('div.images');
+    $collectionHolder.data('index', $collectionHolder.find(':input').length);
+    addImageForm($collectionHolder, $collectionHolder);
+});
+
+function addImageForm($collectionHolder, $newLinkLi) {
+    var prototype = $collectionHolder.data('prototype');
+    var index = $collectionHolder.data('index');
+    var newForm = prototype.replace(/__name__/g, index);
+    $collectionHolder.data('index', index + 1);
+    var $newFormLi = $('<div class="form-group"></div>').append(newForm);
+    $newLinkLi.before($newFormLi);
+}
