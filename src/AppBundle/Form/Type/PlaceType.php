@@ -23,6 +23,8 @@ class PlaceType extends AbstractType
                 ->add('images', CollectionType::class, array(
                         'entry_type' => ImageType::class,
                         'allow_add'    => true,
+                        'by_reference' => false,
+                        'allow_delete' => true,
                 ))
                 ->add('save', SubmitType::class, array(
                     'attr' => array('class' => 'save'),

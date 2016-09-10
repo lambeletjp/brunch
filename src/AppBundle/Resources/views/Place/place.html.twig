@@ -8,8 +8,8 @@
 <div class="container">
     <div>
         <ol id="carousel_images">
-        {% for placeImage in placeImages %}
-            <li><img src="{{placeImage.imageUrl }}"></li>
+        {% for image in place.images %}
+            <li><img src="{{image.imageUrl }}"></li>
         {% endfor %}
         </ol>
         <div>

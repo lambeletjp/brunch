@@ -9,6 +9,7 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Doctrine\ORM\Mapping\OneToMany;
+use Proxies\__CG__\AppBundle\Entity\PlaceImage;
 
 /**
  * Place
@@ -87,7 +88,7 @@ class Place
 
     /**
      *
-     * @OneToMany(targetEntity="Image", mappedBy="place",cascade={"persist"})
+     * @OneToMany(targetEntity="Image", mappedBy="place", cascade={"persist"})
      * @var \Doctrine\Common\Collections\Collection
      */
     protected $images;
@@ -290,10 +291,13 @@ class Place
      */
     public function addImage(Image $image)
     {
-        $this->images[] = $image;
-        $images[] = $image;
+        $image->addPlace($this);
+        $this->images->add($image);
+    }
 
-        return $this;
+    public function removeImage(Image $image)
+    {
+        $this->images->removeElement($image);
     }
 
     public function setImages($images){
@@ -305,9 +309,12 @@ class Place
     }
 
     public function getImageTeaser(){
-        foreach($this->images as $image){
-
+        $image = $this->images->first();
+        if(!$image){
+            $image = new Image();
+            $image->setImageName('defaultImage.jpeg');
         }
+        return $image;
     }
 
     /**
@@ -327,6 +334,7 @@ class Place
     {
         return $this->getAddress() .', '. $this->getPostalCode() .'' . $this->getCity();
     }
+
 
 
 

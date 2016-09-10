@@ -48,8 +48,7 @@ class PlaceController extends Controller
         }
 
         return $this->render('AppBundle:Place:place.html.twig',[
-            'place' => $place,
-            'placeImages' => []
+            'place' => $place
         ]);
     }
 
@@ -60,13 +59,12 @@ class PlaceController extends Controller
      */
     public function formPlaceAction(Request $request)
     {
-        $place = new Place();
-
         $form = $this->createForm(PlaceType::class);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $place = $form->getData();
             /** @var \Geocoder\Model\AddressCollection $addressCollection */
             $addressCollection = $this->getDoctrine()
                 ->getRepository('AppBundle:Place')
@@ -78,16 +76,14 @@ class PlaceController extends Controller
                 $place->setLatitude($address->getLatitude());
                 $em = $this->getDoctrine()->getManager();
                 /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
-                if ($image = $place->getImages()) {
-                    $place->setImages(new ArrayCollection());
-                    $imageName = md5(uniqid()).'.'.$image->guessExtension();
-                    $image->move(
+                foreach ($place->getImages() as $image) {
+                    $imageFile = $image->getImageFile();
+                    $imageName = md5(uniqid()).'.'.$imageFile->guessExtension();
+                    $imageFile->move(
                         $this->getParameter('placeImage_directory'),
                         $imageName
                     );
-                    $placeImage = new Image();
-                    $placeImage->setImageName($imageName);
-                    $place->addImage($placeImage);
+                    $image->setImageName($imageName);
                 }
                 $em->persist($place);
                 $em->flush();

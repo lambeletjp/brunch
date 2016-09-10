@@ -53,6 +53,8 @@ class Image
      */
     protected $place;
 
+    protected $imageFile;
+
 
     protected $imageUrl = 'uploads/placesImages/';
 
@@ -98,6 +100,27 @@ class Image
 
     public function getImageUrl(){
         return '/'.$this->imageUrl.$this->imageName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param mixed $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        $this->imageFile = $imageFile;
+    }
+
+    public function addPlace($place)
+    {
+        $this->place = $place;
     }
 
 
