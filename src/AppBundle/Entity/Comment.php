@@ -38,12 +38,20 @@ class Comment extends BaseComment implements VotableCommentInterface,SignedComme
     protected $score = 0;
 
     /**
+     * @ORM\Column(type="integer")
+     * @var int
+     */
+    protected $rating = 0;
+
+    /**
      * Author of the comment
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @var User
      */
     protected $author;
+
+
 
 
     /**
@@ -107,6 +115,22 @@ class Comment extends BaseComment implements VotableCommentInterface,SignedComme
         }
 
         return $this->getAuthor()->getUsername();
+    }
+
+    /**
+     * @return int
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    }
+
+    /**
+     * @param int $rating
+     */
+    public function setRating($rating)
+    {
+        $this->rating = $rating;
     }
 }
 
