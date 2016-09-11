@@ -93,6 +93,100 @@ class Place
     protected $images;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="hasBuffet", type="boolean")
+     */
+    protected $hasBuffet;
+
+    /**
+     *
+     * @ORM\Column(name="mondayStart", type="time", nullable=true)
+     */
+    protected $mondayStart;
+    /**
+     *
+     * @ORM\Column(name="mondayStop", type="time", nullable=true)
+     */
+    protected $mondayStop;
+
+    /**
+     *
+     * @ORM\Column(name="tuesdayStart", type="time", nullable=true)
+     */
+    protected $tuesdayStart;
+    /**
+     *
+     * @ORM\Column(name="tuesdayStop", type="time", nullable=true)
+     */
+    protected $tuesdayStop;
+
+    /**
+     *
+     * @ORM\Column(name="wednesdayStart", type="time", nullable=true)
+     */
+    protected $wednesdayStart;
+    /**
+     *
+     * @ORM\Column(name="wednesdayStop", type="time", nullable=true)
+     */
+    protected $wednesdayStop;
+
+    /**
+     *
+     * @ORM\Column(name="thursdayStart", type="time", nullable=true)
+     */
+    protected $thursdayStart;
+    /**
+     *
+     * @ORM\Column(name="thursdayStop", type="time", nullable=true)
+     */
+    protected $thursdayStop;
+
+    /**
+     *
+     * @ORM\Column(name="fridayStart", type="time", nullable=true)
+     */
+    protected $fridayStart;
+    /**
+     *
+     * @ORM\Column(name="fridayStop", type="time", nullable=true)
+     */
+    protected $fridayStop;
+
+    /**
+     *
+     * @ORM\Column(name="saturdayStart", type="time", nullable=true)
+     */
+    protected $saturdayStart;
+    /**
+     *
+     * @ORM\Column(name="saturdayStop", type="time", nullable=true)
+     */
+    protected $saturdayStop;
+
+    /**
+     *
+     * @ORM\Column(name="sundayStart", type="time", nullable=true)
+     */
+    protected $sundayStart;
+
+    /**
+     *
+     * @ORM\Column(name="sundayStop", type="time", nullable=true)
+     */
+    protected $sundayStop;
+
+
+    /**
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    protected $price;
+
+
+
+    /**
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255, nullable=true)
@@ -122,6 +216,7 @@ class Place
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->filters = new ArrayCollection();
         $this->updatedAt = new \DateTime("now");
         $this->createdAt = new \DateTime("now");
     }
@@ -316,6 +411,17 @@ class Place
         return $image;
     }
 
+    public function addFilter(Filter $filter)
+    {
+        $filter->addPlace($this);
+        $this->filters->add($filter);
+    }
+
+    public function removeFilter(Filter $filter)
+    {
+        $this->images->removeElement($filter);
+    }
+
     /**
      * @return mixed
      */
@@ -334,7 +440,261 @@ class Place
         return $this->getAddress() .', '. $this->getPostalCode() .'' . $this->getCity();
     }
 
+    /**
+     * @return boolean
+     */
+    public function isHasBuffet()
+    {
+        return $this->hasBuffet;
+    }
 
+    /**
+     * @param boolean $hasBuffet
+     */
+    public function setHasBuffet($hasBuffet)
+    {
+        $this->hasBuffet = $hasBuffet;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getMondayStart()
+    {
+        return $this->mondayStart;
+    }
+
+    /**
+     * @param mixed $mondayStart
+     */
+    public function setMondayStart($mondayStart)
+    {
+        $this->mondayStart = $mondayStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMondayStop()
+    {
+        return $this->mondayStop;
+    }
+
+    /**
+     * @param mixed $mondayStop
+     */
+    public function setMondayStop($mondayStop)
+    {
+        $this->mondayStop = $mondayStop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTuesdayStart()
+    {
+        return $this->tuesdayStart;
+    }
+
+    /**
+     * @param mixed $tuesdayStart
+     */
+    public function setTuesdayStart($tuesdayStart)
+    {
+        $this->tuesdayStart = $tuesdayStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTuesdayStop()
+    {
+        return $this->tuesdayStop;
+    }
+
+    /**
+     * @param mixed $tuesdayStop
+     */
+    public function setTuesdayStop($tuesdayStop)
+    {
+        $this->tuesdayStop = $tuesdayStop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWednesdayStart()
+    {
+        return $this->wednesdayStart;
+    }
+
+    /**
+     * @param mixed $wednesdayStart
+     */
+    public function setWednesdayStart($wednesdayStart)
+    {
+        $this->wednesdayStart = $wednesdayStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWednesdayStop()
+    {
+        return $this->wednesdayStop;
+    }
+
+    /**
+     * @param mixed $wednesdayStop
+     */
+    public function setWednesdayStop($wednesdayStop)
+    {
+        $this->wednesdayStop = $wednesdayStop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThursdayStart()
+    {
+        return $this->thursdayStart;
+    }
+
+    /**
+     * @param mixed $thursdayStart
+     */
+    public function setThursdayStart($thursdayStart)
+    {
+        $this->thursdayStart = $thursdayStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getThursdayStop()
+    {
+        return $this->thursdayStop;
+    }
+
+    /**
+     * @param mixed $thursdayStop
+     */
+    public function setThursdayStop($thursdayStop)
+    {
+        $this->thursdayStop = $thursdayStop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFridayStart()
+    {
+        return $this->fridayStart;
+    }
+
+    /**
+     * @param mixed $fridayStart
+     */
+    public function setFridayStart($fridayStart)
+    {
+        $this->fridayStart = $fridayStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFridayStop()
+    {
+        return $this->fridayStop;
+    }
+
+    /**
+     * @param mixed $fridayStop
+     */
+    public function setFridayStop($fridayStop)
+    {
+        $this->fridayStop = $fridayStop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaturdayStart()
+    {
+        return $this->saturdayStart;
+    }
+
+    /**
+     * @param mixed $saturdayStart
+     */
+    public function setSaturdayStart($saturdayStart)
+    {
+        $this->saturdayStart = $saturdayStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSaturdayStop()
+    {
+        return $this->saturdayStop;
+    }
+
+    /**
+     * @param mixed $saturdayStop
+     */
+    public function setSaturdayStop($saturdayStop)
+    {
+        $this->saturdayStop = $saturdayStop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSundayStart()
+    {
+        return $this->sundayStart;
+    }
+
+    /**
+     * @param mixed $sundayStart
+     */
+    public function setSundayStart($sundayStart)
+    {
+        $this->sundayStart = $sundayStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSundayStop()
+    {
+        return $this->sundayStop;
+    }
+
+    /**
+     * @param mixed $sundayStop
+     */
+    public function setSundayStop($sundayStop)
+    {
+        $this->sundayStop = $sundayStop;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param mixed $price
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+    }
+    
 
 }

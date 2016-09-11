@@ -17,6 +17,22 @@
             {{ form_row(form.address) }}
             {{ form_row(form.postalCode) }}
             {{ form_row(form.city) }}
+            {{ form_row(form.price) }}
+            {{ form_row(form.hasBuffet) }}
+            {{ form_row(form.mondayStart) }}
+            {{ form_row(form.mondayStop) }}
+            {{ form_row(form.tuesdayStart) }}
+            {{ form_row(form.tuesdayStop) }}
+            {{ form_row(form.wednesdayStart) }}
+            {{ form_row(form.wednesdayStop) }}
+            {{ form_row(form.thursdayStart) }}
+            {{ form_row(form.thursdayStop) }}
+            {{ form_row(form.fridayStart) }}
+            {{ form_row(form.fridayStop) }}
+            {{ form_row(form.saturdayStart) }}
+            {{ form_row(form.saturdayStop) }}
+            {{ form_row(form.sundayStart) }}
+            {{ form_row(form.sundayStop) }}
             <div class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
             </div>
             {{ form_row(form._token) }}

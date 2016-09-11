@@ -10,6 +10,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Place;
+use AppBundle\Entity\PlaceImage;
 use AppBundle\Form\Type\ImageType;
 use AppBundle\Form\Type\PlaceType;
 use Doctrine\Common\Collections\ArrayCollection;
