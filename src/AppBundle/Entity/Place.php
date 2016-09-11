@@ -65,7 +65,7 @@ class Place
      * @var string
      *
      * @ORM\Column(name="siteweb", type="string", length=255, nullable=true)
-     * @Expose
+     *
      */
     private $siteweb;
 
@@ -190,9 +190,15 @@ class Place
      * @var string
      *
      * @ORM\Column(name="slug", type="string", length=255, nullable=true)
-     * @Expose
+     *
      */
     protected $slug;
+
+    /**
+     * @var string
+     * @Expose
+     */
+    protected $googleInfoBox;
 
 
     /**
@@ -695,6 +701,24 @@ class Place
     {
         $this->price = $price;
     }
+
+    /**
+     * @return string
+     */
+    public function getGoogleInfoBox()
+    {
+        return $this->googleInfoBox;
+    }
+
+    /**
+     * @param string $googleInfoBox
+     */
+    public function setGoogleInfoBox($googleInfoBox)
+    {
+        $this->googleInfoBox = $googleInfoBox;
+    }
+
     
+
 
 }

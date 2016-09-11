@@ -9,9 +9,13 @@
 namespace AppBundle\Controller;
 
 
+use JMS\Serializer\SerializerBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class PlaceRestController extends Controller
 {
@@ -20,7 +24,16 @@ class PlaceRestController extends Controller
      */
     public function getPlacesAction(){
         $places = $this->getDoctrine()->getRepository('AppBundle:Place')->findAll();
-        $places = $this->getDoctrine()->getRepository('AppBundle:Place')->geoFormat($places);
-        return new Response(json_encode($places));
+        /** @var \AppBundle\Entity\Place $place */
+        foreach($places as $place){
+            $infoBox = $this->render('AppBundle:GoogleMap:infoBox.html.twig', array('place' => $place));
+            $place->setGoogleInfoBox($infoBox->getContent());
+        }
+        
+        
+        
+        $serializer = SerializerBuilder::create()->build();
+        $jsonContent = $serializer->serialize($places, 'json');
+        return new Response($jsonContent);
     }
 }

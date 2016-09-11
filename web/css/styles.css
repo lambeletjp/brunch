@@ -184,3 +184,14 @@ a,a:visited,a:hover,a:active {
     position: relative;
     width: 99999px;
 }
+
+#googleinfobox{
+    max-height: 300px;
+}
+
+#googleinfobox img{
+    height: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
