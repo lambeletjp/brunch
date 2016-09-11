@@ -9,7 +9,6 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Doctrine\ORM\Mapping\OneToMany;
-use Proxies\__CG__\AppBundle\Entity\Image;
 
 /**
  * Place
