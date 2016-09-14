@@ -15,9 +15,7 @@ function initMap() {
         var items = [];
         var infoWindowOpen = null;
         $.each( data, function( key, place ) {
-            console.log(place);
             var coords = {'lat':place.latitude,'lng':place.longitude};
-
             var marker = new google.maps.Marker({
                 position: coords,
                 map: map,

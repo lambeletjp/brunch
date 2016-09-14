@@ -55,4 +55,35 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
 
         return $geoFormat;
     }
+
+    public function findPointAtDistanceInKm($latitude, $longitude, $distance)
+    {
+        $em = $this->getEntityManager();
+        $connection = $em->getConnection();
+        $sql = 'SELECT id,
+                ( 6371 * acos( cos( radians(:latitude) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(:longitude) ) + sin( radians(:latitude) ) * sin( radians( latitude ) ) ) ) AS distance 
+                FROM place 
+                HAVING distance < :distance 
+                ORDER BY distance LIMIT 0 , 20;';
+        $statement = $connection->prepare($sql);
+        $statement->bindValue('longitude', $longitude);
+        $statement->bindValue('latitude', $latitude);
+        $statement->bindValue('distance', $distance);
+        $statement->execute();
+        $placesIds = $statement->fetchAll();
+
+        $ids = [];
+        foreach($placesIds as $placeId){
+            $ids[] = $placeId['id'];
+        }
+
+        $places = [];
+        if($ids){
+            $ids = implode(',',$ids);
+            $query = $em->createQuery('SELECT place FROM AppBundle:Place place WHERE place.id IN('.$ids.')');
+            $places = $query->getResult();
+        }
+
+        return $places;
+    }
 }
