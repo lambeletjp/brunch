@@ -97,3 +97,16 @@ function addImageForm($collectionHolder, $newLinkLi) {
     var $newFormLi = $('<div class="images_list"></div>').append(newForm);
     $newLinkLi.before($newFormLi);
 }
+
+
+$(document).on('ready', function() {
+    $(".place_slider").slick({
+        dots: true,
+        infinite: true,
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        variableWidth: true,
+        adaptiveHeight: true
+    });
+});

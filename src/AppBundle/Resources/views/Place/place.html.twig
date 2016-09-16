@@ -2,24 +2,111 @@
 
 
 {% block title %}Brunch{% endblock %}
-
-{% block body %}
-
-<div class="container">
-    <div>
-        <ol id="carousel_images">
-        {% for image in place.images %}
-            <li><img src="{{image.imageUrl }}"></li>
-        {% endfor %}
-        </ol>
-        <div>
-            <h3>{{ place.name }}</h3>
-            <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city}}</p>
+{% block teaserImage %}
+    <div class="jumbotron">
+        <div class="container">
         </div>
     </div>
-</div>
-<div class="container">
-    {% include 'FOSCommentBundle:Thread:async.html.twig' with {'id': 35} %}
-</div>
+{% endblock %}
+{% block body %}
+    <section class="place_slider">
+        <div>
+            <img src="{{ place.imageTeaser.imageUrl }}">
+        </div>
+        {% for image in place.images %}
+            <div>
+                <img src="{{ image.imageUrl }}">
+            </div>
+        {% endfor %}
+    </section>
+    <div class="container">
+        <div>
+            <div>
+                <h3>{{ place.name }}</h3>
+                <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
+
+                <div class="brunch_info">
+                    <h3>Informations</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>Has a Buffet?</th>
+                                    <td><input type="checkbox" {% if place.hasBuffet %}checked{% endif %} disabled></td>
+                                </tr>
+                                <tr>
+                                    <th>Price</th>
+                                    <td>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">€ </span>
+                                            <input type="text" class="form-control" value="{{ place.price }}" disabled>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                <div class="brunch_time">
+                    <h3>Brunch time</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Begin</th>
+                                    <th>End</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>Monday</th>
+                                    <td>{{ place.mondayStart|date("H:i") }}</td>
+                                    <td>{{ place.mondayStop|date("H:i") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tuesday</th>
+                                    <td>{{ place.tuesdayStart|date("H:i") }}</td>
+                                    <td>{{ place.tuesdayStop|date("H:i") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Wednesday</th>
+                                    <td>{{ place.wednesdayStart|date("H:i") }}</td>
+                                    <td>{{ place.wednesdayStop|date("H:i") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Monday</th>
+                                    <td>{{ place.mondayStart|date("H:i") }}</td>
+                                    <td>{{ place.mondayStop|date("H:i") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Thursday</th>
+                                    <td>{{ place.thursdayStart|date("H:i") }}</td>
+                                    <td>{{ place.thursdayStop|date("H:i") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Friday</th>
+                                    <td>{{ place.fridayStart|date("H:i") }}</td>
+                                    <td>{{ place.fridayStop|date("H:i") }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Saturday</th>
+                                    <td>{{ place.saturdayStart|date("H:i") }}</td>
+                                    <td>{{ place.saturdayStop|date("H:i") }}</td>
+                                </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

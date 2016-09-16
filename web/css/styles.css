@@ -195,3 +195,37 @@ a,a:visited,a:hover,a:active {
     margin-left: auto;
     margin-right: auto;
 }
+
+.brunch_info {
+    max-width: 300px;
+    display: inline-block;
+    margin-right: 100px;
+}
+
+.brunch_time {
+    display: inline-block;
+    max-width: 200px;
+}
+
+.slick-slide img{
+    width: 300px;
+    max-height:300px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.slider {
+    width: 50%;
+    margin: 100px auto;
+}
+
+.slick-slide {
+    margin: 0px 20px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: black;
+}

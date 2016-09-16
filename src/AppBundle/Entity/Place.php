@@ -417,17 +417,6 @@ class Place
         return $image;
     }
 
-    public function addFilter(Filter $filter)
-    {
-        $filter->addPlace($this);
-        $this->filters->add($filter);
-    }
-
-    public function removeFilter(Filter $filter)
-    {
-        $this->images->removeElement($filter);
-    }
-
     /**
      * @return mixed
      */
