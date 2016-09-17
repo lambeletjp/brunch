@@ -10,9 +10,6 @@
 {% endblock %}
 {% block body %}
     <section class="place_slider">
-        <div>
-            <img src="{{ place.imageTeaser.imageUrl }}">
-        </div>
         {% for image in place.images %}
             <div>
                 <img src="{{ image.imageUrl }}">
