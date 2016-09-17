@@ -123,4 +123,5 @@ $(document).on('ready', function() {
     });
 
     initMapPlace();
+    initMap();
 });
