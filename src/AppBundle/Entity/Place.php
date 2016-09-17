@@ -414,7 +414,7 @@ class Place
     public function getImages(){
         $images= new ArrayCollection();
         foreach($this->images as $image){
-            if($image->getApproved()){
+            if(!$image->getApproved()){
                 continue;
             }
             $images->add($image);

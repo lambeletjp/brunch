@@ -1,7 +1,7 @@
 <?php
 
 use Symfony\Component\HttpFoundation\Request;
-
+date_default_timezone_set( 'Europe/Berlin' );
 /**
  * @var Composer\Autoload\ClassLoader
  */
