@@ -73,7 +73,7 @@ class PlaceController extends Controller
             $imageForm = $this->createForm(ImageAddType::class);
             $data['imageForm'] = $imageForm->createView();
 
-            if ($request->request->has('image')) {
+            if ($request->request->has('image_add')) {
                 $imageForm->handleRequest($request);
                 if ($imageForm->isSubmitted() && $imageForm->isValid()) {
                     $image = $imageForm->getData();
@@ -99,7 +99,7 @@ class PlaceController extends Controller
     }
 
     /**
-     * @Route("/newPlace", name="place_form")
+     * @Route("/place/new", name="place_form")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -120,10 +120,9 @@ class PlaceController extends Controller
             $redirectUrl = $this->generateUrl('place', ['id' => $place->getId(), 'slug' => $place->getSlug()]);
             return $this->redirect($redirectUrl);
         }
-
         return $this->render('AppBundle:Place:form.html.twig'
             , array(
-                'form' => $form->createView(),
+                'form' => $form->createView()
             ));
     }
 

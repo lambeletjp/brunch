@@ -6,7 +6,7 @@
 {% block body %}
     <div class="container">
         <row>
-            <h2>Add a new location</h2>
+            <h2>New location</h2>
         </row>
         <row>
             {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
@@ -19,20 +19,55 @@
             {{ form_row(form.city) }}
             {{ form_row(form.price) }}
             {{ form_row(form.hasBuffet) }}
-            {{ form_row(form.mondayStart) }}
-            {{ form_row(form.mondayStop) }}
-            {{ form_row(form.tuesdayStart) }}
-            {{ form_row(form.tuesdayStop) }}
-            {{ form_row(form.wednesdayStart) }}
-            {{ form_row(form.wednesdayStop) }}
-            {{ form_row(form.thursdayStart) }}
-            {{ form_row(form.thursdayStop) }}
-            {{ form_row(form.fridayStart) }}
-            {{ form_row(form.fridayStop) }}
-            {{ form_row(form.saturdayStart) }}
-            {{ form_row(form.saturdayStop) }}
-            {{ form_row(form.sundayStart) }}
-            {{ form_row(form.sundayStop) }}
+
+
+            <h3>Brunch time</h3>
+            <div class="hidden-sm col-md-1"></div>
+            <div class="brunch_time brunch_time_edit col-sm-9 col-md-8">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th>Begin</th>
+                            <th>End</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>Monday</th>
+                            <td>{{ form_widget(form.mondayStart) }}</td>
+                            <td>{{ form_widget(form.mondayStop) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tuesday</th>
+                            <td>{{ form_widget(form.tuesdayStart) }}</td>
+                            <td>{{ form_widget(form.tuesdayStop) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Wednesday</th>
+                            <td>{{ form_widget(form.wednesdayStart) }}</td>
+                            <td>{{ form_widget(form.wednesdayStop) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Thursday</th>
+                            <td>{{ form_widget(form.thursdayStart) }}</td>
+                            <td>{{ form_widget(form.thursdayStop) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Friday</th>
+                            <td>{{ form_widget(form.fridayStart) }}</td>
+                            <td>{{ form_widget(form.fridayStop) }}</td>
+                        </tr>
+                        <tr>
+                            <th>Saturday</th>
+                            <td>{{ form_widget(form.saturdayStart) }}</td>
+                            <td>{{ form_widget(form.saturdayStop) }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <div class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
             </div>
             {{ form_row(form._token) }}

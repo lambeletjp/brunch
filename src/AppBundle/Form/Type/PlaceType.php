@@ -2,6 +2,7 @@
 namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Image;
+use DateTime;
 use Sonata\CoreBundle\Form\Type\BooleanType;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
@@ -29,20 +30,20 @@ class PlaceType extends AbstractType
             ->add('hasBuffet', CheckboxType::class, array(
                 'required' => false
             ))
-            ->add('mondayStart', TimeType::class, array('required' => false))
-            ->add('mondayStop', TimeType::class, array('required' => false))
-            ->add('tuesdayStart', TimeType::class, array('required' => false))
-            ->add('tuesdayStop', TimeType::class, array('required' => false))
-            ->add('wednesdayStart', TimeType::class, array('required' => false))
-            ->add('wednesdayStop', TimeType::class, array('required' => false))
-            ->add('thursdayStart', TimeType::class, array('required' => false))
-            ->add('thursdayStop', TimeType::class, array('required' => false))
-            ->add('fridayStart', TimeType::class, array('required' => false))
-            ->add('fridayStop', TimeType::class, array('required' => false))
-            ->add('saturdayStart', TimeType::class, array('required' => false))
-            ->add('saturdayStop', TimeType::class, array('required' => false))
-            ->add('sundayStart', TimeType::class, array('required' => false))
-            ->add('sundayStop', TimeType::class, array('required' => false))
+            ->add('mondayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('mondayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('tuesdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('tuesdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('wednesdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('wednesdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('thursdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('thursdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('fridayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('fridayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('saturdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('saturdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('sundayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('sundayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
             ->add('images', CollectionType::class, array(
                 'entry_type' => ImageType::class,
                 'allow_add' => true,
