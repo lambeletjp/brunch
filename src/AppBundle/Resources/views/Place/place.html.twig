@@ -16,12 +16,18 @@
             </div>
         {% endfor %}
     </section>
-    <div class="container">
+    <div class="container place">
         <div>
             <div>
-                <h3>{{ place.name }}</h3>
-                <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
-
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3">
+                        {% include 'AppBundle:Place:mapPlace.html.twig' %}
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-6">
+                        <h1>{{ place.name }}</h1>
+                        <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
+                    </div>
+                </div>
                 <div class="brunch_info">
                     <h3>Informations</h3>
                     <div class="table-responsive">

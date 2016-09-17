@@ -256,3 +256,7 @@ a,a:visited,a:hover,a:active {
     border-radius: 16px;
     text-align: center;
 }
+
+.place{
+    margin-top: 20px;
+}
