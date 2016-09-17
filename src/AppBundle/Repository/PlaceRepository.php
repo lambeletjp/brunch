@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 use AppBundle\Entity\Place;
+use Geocoder\Model\AddressCollection;
 use Geocoder\Provider\GoogleMaps;
 use Ivory\HttpAdapter\CurlHttpAdapter;
 
@@ -15,7 +16,11 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getAddressCollection(Place $place)
     {
-        return $this->getGoogleAddress($place->getGoogleAddress());
+        $googleAddress = $place->getGoogleAddress();
+        if(!$googleAddress){
+            return new AddressCollection();
+        }
+        return $this->getGoogleAddress($googleAddress);
     }
 
     public function getGoogleAddress($address)

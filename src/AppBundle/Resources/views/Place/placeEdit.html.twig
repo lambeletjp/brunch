@@ -1,0 +1,112 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+
+{% block title %}Brunch{% endblock %}
+{% block teaserImage %}
+    <div class="jumbotron">
+        <div class="container">
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <section class="place_slider">
+        {% for image in place.images %}
+            <div>
+                <img src="{{ image.imageUrl }}">
+            </div>
+        {% endfor %}
+    </section>
+    <div class="container">
+        {{ form_start(imageForm) }}
+        {{ form_widget(imageForm) }}
+        {{ form_end(imageForm) }}
+    </div>
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_widget(form._token) }}
+        <div>
+            <div>
+                <h3>{{ place.name }}</h3>
+                <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
+
+                <div class="brunch_info">
+                    <h3>Informations</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>Has a Buffet?</th>
+                                    <td>
+                                        {{ form_widget(form.hasBuffet) }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Price</th>
+                                    <td>
+                                        <div class="input-group">
+                                            {{ form_widget(form.price) }}
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+                <div class="brunch_time brunch_time_edit">
+                    <h3>Brunch time</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                                <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Begin</th>
+                                    <th>End</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th>Monday</th>
+                                    <td>{{ form_widget(form.mondayStart) }}</td>
+                                    <td>{{ form_widget(form.mondayStop) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tuesday</th>
+                                    <td>{{ form_widget(form.tuesdayStart) }}</td>
+                                    <td>{{ form_widget(form.tuesdayStop) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Wednesday</th>
+                                    <td>{{ form_widget(form.wednesdayStart) }}</td>
+                                    <td>{{ form_widget(form.wednesdayStop) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Thursday</th>
+                                    <td>{{ form_widget(form.thursdayStart) }}</td>
+                                    <td>{{ form_widget(form.thursdayStop) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Friday</th>
+                                    <td>{{ form_widget(form.fridayStart) }}</td>
+                                    <td>{{ form_widget(form.fridayStop) }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Saturday</th>
+                                    <td>{{ form_widget(form.saturdayStart) }}</td>
+                                    <td>{{ form_widget(form.saturdayStop) }}</td>
+                                </tr>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_widget(form.save) }}
+    </div>
+{% endblock %}

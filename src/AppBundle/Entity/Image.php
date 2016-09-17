@@ -98,6 +98,11 @@ class Image
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = null;
+    }
+
     public function getImageUrl(){
         return '/'.$this->imageUrl.$this->imageName;
     }

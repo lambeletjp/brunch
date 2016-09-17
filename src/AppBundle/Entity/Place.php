@@ -432,6 +432,9 @@ class Place
 
     public function getGoogleAddress()
     {
+        if(!$this->getAddress() && !$this->getPostalCode() && !$this->getCity()){
+            return null;
+        }
         return $this->getAddress() .', '. $this->getPostalCode() .'' . $this->getCity();
     }
 
