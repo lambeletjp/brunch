@@ -68,6 +68,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+    port:         "%mailer_port%"
+    encryption:   "%mailer_encryption%"
 
 
 fos_rest:
@@ -95,6 +97,9 @@ fos_user:
     registration:
         confirmation:
             enabled: true
+            from_email:
+                address: info@where-to-brunch.com
+                sender_name: where-to-brunch.com
 
 sonata_block:
     default_contexts: [cms]
