@@ -238,3 +238,13 @@ a,a:visited,a:hover,a:active {
     color: blue;
     text-decoration: underline;
 }
+
+#image_add_imageFile{
+    margin-top: 12px;
+    line-height: 10px;
+}
+
+.imageForm {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

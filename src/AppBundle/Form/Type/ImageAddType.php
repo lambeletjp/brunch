@@ -8,12 +8,15 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ImageType extends AbstractType
+class ImageAddType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('imageFile', FileType::class, array('required' => false));
+            ->add('imageFile', FileType::class, array('required' => false))
+            ->add('save', SubmitType::class, array(
+                'attr' => array('class' => 'save'),
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Place;
 use AppBundle\Entity\PlaceImage;
+use AppBundle\Form\Type\ImageAddType;
 use AppBundle\Form\Type\ImageType;
 use AppBundle\Form\Type\PlaceType;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -52,11 +53,12 @@ class PlaceController extends Controller
             return $this->redirect($redirectUrl);
         }
         $data['place'] = $place;
-        
-        $securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') != true) {
 
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $securityContext */
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') == true) {
             $template = 'AppBundle:Place:placeEdit.html.twig';
+
             $form = $this->createForm(PlaceType::class, $place, array('method' => 'PATCH'));
             $data['form'] = $form->createView();
 
@@ -68,7 +70,7 @@ class PlaceController extends Controller
                 }
             }
 
-            $imageForm = $this->createForm(ImageType::class);
+            $imageForm = $this->createForm(ImageAddType::class);
             $data['imageForm'] = $imageForm->createView();
 
             if ($request->request->has('image')) {
