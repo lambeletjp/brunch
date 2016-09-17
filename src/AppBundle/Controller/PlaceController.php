@@ -59,6 +59,11 @@ class PlaceController extends Controller
      */
     public function formPlaceAction(Request $request)
     {
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') != true) {
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
+        
         $form = $this->createForm(PlaceType::class);
 
         $form->handleRequest($request);

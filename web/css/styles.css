@@ -229,3 +229,8 @@ a,a:visited,a:hover,a:active {
 .slick-next:before {
     color: black;
 }
+
+.register_link{
+    color: blue;
+    text-decoration: underline;
+}
