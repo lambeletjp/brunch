@@ -11,7 +11,7 @@ function initMap() {
             zoom: 14
         });
 
-        var url = 'app_dev.php/api/places?lat=' + coords.lat + '&lng=' + coords.lng;
+        var url = '/api/places?lat=' + coords.lat + '&lng=' + coords.lng;
         $.getJSON(url, function (data) {
             var items = [];
             var infoWindowOpen = null;
