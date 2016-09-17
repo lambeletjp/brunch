@@ -12,7 +12,7 @@
     <section class="place_slider">
         {% for image in place.images %}
             <div>
-                <img src="{{ image.imageUrl }}">
+                <img src="{{ image.imageUrl }}" alt="{{ place.name }}">
             </div>
         {% endfor %}
     </section>
