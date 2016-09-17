@@ -26,84 +26,100 @@
                     <h3>Informations</h3>
                     <div class="table-responsive">
                         <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th>Has a Buffet?</th>
-                                    <td><input type="checkbox" {% if place.hasBuffet %}checked{% endif %} disabled></td>
-                                </tr>
-                                <tr>
-                                    <th>Price</th>
-                                    <td>
-                                        <div class="input-group">
-                                            <span class="input-group-addon">€ </span>
-                                            <input type="text" class="form-control" value="{{ place.price }}" disabled>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>Has a Buffet?</th>
+                                <td><input type="checkbox" {% if place.hasBuffet %}checked{% endif %} disabled></td>
+                            </tr>
+                            <tr>
+                                <th>Price</th>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">€ </span>
+                                        <input type="text" class="form-control" value="{{ place.price }}" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div class="brunch_time">
                     <h3>Brunch time</h3>
                     <div class="table-responsive">
                         <table class="table">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Begin</th>
-                                    <th>End</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Begin</th>
+                                <th>End</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if place.mondayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Monday</th>
                                     <td>{{ place.mondayStart|date("H:i") }}</td>
                                     <td>{{ place.mondayStop|date("H:i") }}</td>
                                 </tr>
+                            {% endif %}
+                            {% if place.tuesdayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Tuesday</th>
                                     <td>{{ place.tuesdayStart|date("H:i") }}</td>
                                     <td>{{ place.tuesdayStop|date("H:i") }}</td>
                                 </tr>
+                            {% endif %}
+                            {% if place.wednesdayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Wednesday</th>
                                     <td>{{ place.wednesdayStart|date("H:i") }}</td>
                                     <td>{{ place.wednesdayStop|date("H:i") }}</td>
                                 </tr>
+                            {% endif %}
+                            {% if place.mondayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Monday</th>
                                     <td>{{ place.mondayStart|date("H:i") }}</td>
                                     <td>{{ place.mondayStop|date("H:i") }}</td>
                                 </tr>
+                            {% endif %}
+                            {% if place.thursdayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Thursday</th>
                                     <td>{{ place.thursdayStart|date("H:i") }}</td>
                                     <td>{{ place.thursdayStop|date("H:i") }}</td>
                                 </tr>
+                            {% endif %}
+                            {% if place.fridayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Friday</th>
                                     <td>{{ place.fridayStart|date("H:i") }}</td>
                                     <td>{{ place.fridayStop|date("H:i") }}</td>
                                 </tr>
+                            {% endif %}
+                            {% if place.saturdayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Saturday</th>
                                     <td>{{ place.saturdayStart|date("H:i") }}</td>
                                     <td>{{ place.saturdayStop|date("H:i") }}</td>
                                 </tr>
+                            {% endif %}
+                            {% if place.sundayStart|date("H:i") != '00:00' %}
                                 <tr>
                                     <th>Sunday</th>
                                     <td>{{ place.sundayStart|date("H:i") }}</td>
                                     <td>{{ place.sundayStop|date("H:i") }}</td>
                                 </tr>
-                                </tbody>
+                            {% endif %}
+                            </tbody>
                         </table>
                     </div>
                 </div>
