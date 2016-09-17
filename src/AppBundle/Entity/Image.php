@@ -47,6 +47,12 @@ class Image
 
     /**
      *
+     * @ORM\Column(name="approved", type="boolean")
+     */
+    protected $approved = false;
+
+    /**
+     *
      * @ManyToOne(targetEntity="Place", inversedBy="images")
      * @JoinColumn(name="place_id", referencedColumnName="id")
      *
@@ -126,6 +132,22 @@ class Image
     public function addPlace($place)
     {
         $this->place = $place;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApproved()
+    {
+        return $this->approved;
+    }
+
+    /**
+     * @param mixed $approved
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
     }
 
 

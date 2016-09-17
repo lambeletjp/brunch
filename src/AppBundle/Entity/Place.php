@@ -184,6 +184,13 @@ class Place
      */
     protected $price;
 
+    /**
+     *
+     * @ORM\Column(name="approved", type="boolean")
+     * @Expose
+     */
+    protected $approved = false;
+
 
 
     /**
@@ -405,7 +412,14 @@ class Place
     }
 
     public function getImages(){
-        return $this->images;
+        $images= new ArrayCollection();
+        foreach($this->images as $image){
+            if($image->getApproved()){
+                continue;
+            }
+            $images->add($image);
+        }
+        return $images;
     }
 
     public function getImageTeaser(){
@@ -709,6 +723,24 @@ class Place
     {
         $this->googleInfoBox = $googleInfoBox;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getApproved()
+    {
+        return $this->approved;
+    }
+
+    /**
+     * @param mixed $approved
+     */
+    public function setApproved($approved)
+    {
+        $this->approved = $approved;
+    }
+
+
 
     
 

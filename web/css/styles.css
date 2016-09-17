@@ -247,3 +247,13 @@ a,a:visited,a:hover,a:active {
     margin-top: 50px;
     margin-bottom: 20px;
 }
+
+.flash-notice {
+    margin-top: 20px;
+    padding:10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+    text-align: center;
+}

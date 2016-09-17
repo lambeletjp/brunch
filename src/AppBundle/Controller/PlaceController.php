@@ -44,7 +44,7 @@ class PlaceController extends Controller
 
 
         $id = intval($id);
-        $place = $this->getDoctrine()->getRepository('AppBundle:Place')->findOneBy(['id' => $id], null, 10);
+        $place = $this->getDoctrine()->getRepository('AppBundle:Place')->findOneBy(['id' => $id, 'approved' => 1], null, 10);
         if (!$place) {
             throw $this->createNotFoundException('404 - Seite nicht gefunden');
         }
@@ -117,7 +117,11 @@ class PlaceController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $place = $form->getData();
             $this->savePlaceData($place);
-            $redirectUrl = $this->generateUrl('place', ['id' => $place->getId(), 'slug' => $place->getSlug()]);
+            $this->addFlash(
+                'notice',
+                'Your new place is going to be validate by our staff'
+            );
+            $redirectUrl = $this->generateUrl('homepage');
             return $this->redirect($redirectUrl);
         }
         return $this->render('AppBundle:Place:form.html.twig'

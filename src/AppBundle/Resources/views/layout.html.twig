@@ -30,7 +30,6 @@
     <![endif]-->
 </head>
 <body>
-
 {% include 'AppBundle:Navigation:navigation.html.twig' %}
 <!-- Slide gallery -->
 {% block teaserImage %}
@@ -40,7 +39,13 @@
     </div>
 </div>
 {% endblock %}
-
+<div class="container">
+    {% for flash_message in app.session.flashBag.get('notice') %}
+        <div class="flash-notice">
+            <b>{{ flash_message }}</b>
+        </div>
+    {% endfor %}
+</div>
 {% block body %}{% endblock %}
 <!-- Footer -->
 <div class="footer text-center">
