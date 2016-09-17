@@ -43,17 +43,19 @@ function initMap() {
 
 function initMapPlace() {
     var mapDiv = document.getElementById('mapPlace');
-    var latitude = parseFloat(mapDiv.dataset.latitude);
-    var longitude = parseFloat(mapDiv.dataset.longitude);
-    var coords = {'lat': latitude, 'lng': longitude};
-    var map = new google.maps.Map(mapDiv, {
-        center: coords,
-        zoom: 14
-    });
-    var marker = new google.maps.Marker({
-        position: coords,
-        map: map
-    });
+    if(mapDiv) {
+        var latitude = parseFloat(mapDiv.dataset.latitude);
+        var longitude = parseFloat(mapDiv.dataset.longitude);
+        var coords = {'lat': latitude, 'lng': longitude};
+        var map = new google.maps.Map(mapDiv, {
+            center: coords,
+            zoom: 14
+        });
+        var marker = new google.maps.Marker({
+            position: coords,
+            map: map
+        });
+    }
 }
 
 function error(){
