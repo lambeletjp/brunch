@@ -2,7 +2,7 @@
     "name": "jlambelet/symfony",
     "license": "proprietary",
     "type": "project",
-    "minimum-stability":"dev",
+    "minimum-stability":"stable",
     "autoload": {
         "psr-4": {
             "": "src/"
@@ -19,27 +19,26 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "symfony/symfony": "3.0.*",
+        "symfony/symfony": "3.1.*",
+        "symfony/swiftmailer-bundle": "^2.4",
+        "symfony/monolog-bundle": "^2.8",
+        "symfony/assetic-bundle": "2.8.*    ",
         "doctrine/orm": "^2.5",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
-        "symfony/swiftmailer-bundle": "^2.3",
-        "symfony/monolog-bundle": "^2.8",
+        "doctrine/doctrine-migrations-bundle": "*",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "liip/imagine-bundle": "^1.5",
-        "symfony/assetic-bundle": "^2.8",
-        "willdurand/geocoder": "^3.3",
-        "friendsofsymfony/rest-bundle": "dev-master",
-        "jms/serializer-bundle": "dev-master",
+        "friendsofsymfony/rest-bundle": "2.1.*",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "vich/uploader-bundle": "^1.3",
-        "sonata-project/admin-bundle": "^3.6",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.0",
-        "friendsofsymfony/comment-bundle": "^2.0",
-        "doctrine/doctrine-migrations-bundle": "^1.0",
-        "jms/serializer": "^1.3"
+        "friendsofsymfony/comment-bundle": "*",
+        "jms/serializer-bundle": "1.1.*",
+        "sonata-project/admin-bundle": "3.9.*",
+        "sonata-project/doctrine-orm-admin-bundle": "3.1.*",
+        "vich/uploader-bundle": "1.3.*",
+        "willdurand/geocoder": "3.3.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
