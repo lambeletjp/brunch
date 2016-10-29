@@ -5,10 +5,14 @@
 
 {% block body %}
     <div class="container">
+        <h2>Find a brunch</h2>
         <div class="row">
             {% include 'AppBundle:Place:searchForm.html.twig' %}
         </div>
-
+        <br/>
+        <hr/>
+        <br/>
+        <h2>Last added brunch</h2>
         <div class="row list-places">
         {% for place in places %}
             {% include 'AppBundle:Place:placeTeaser.html.twig' with {'place': place} only %}

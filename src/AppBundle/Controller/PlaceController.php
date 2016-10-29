@@ -28,6 +28,79 @@ class PlaceController extends Controller
 {
 
     /**
+     * @Route("/place/{slug}-{id}/edit",
+     *          requirements={
+     *              "slug" = "[^/]+",
+     *              "id" = "\d+"},
+     *          name="placeEdit")
+     * @param $slug
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction($slug, $id, Request $request)
+    {
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $securityContext */
+        $securityContext = $this->container->get('security.authorization_checker');
+        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') != true) {
+            $this->redirect($this->generateUrl('place',['slug'=>$slug,'id' => $id]));
+        }
+
+        $data = [];
+
+
+        $id = intval($id);
+        $place = $this->getDoctrine()->getRepository('AppBundle:Place')->findOneBy(['id' => $id, 'approved' => 1], null, 10);
+        if (!$place) {
+            throw $this->createNotFoundException('404 - Seite nicht gefunden');
+        }
+        if ($place->getSlug() != $slug) {
+            $redirectUrl = $this->generateUrl('place', ['id' => $place->getId(), 'slug' => $place->getSlug()]);
+            return $this->redirect($redirectUrl);
+        }
+        $data['place'] = $place;
+
+        $template = 'AppBundle:Place:placeEdit.html.twig';
+        $form = $this->createForm(PlaceType::class, $place, array('method' => 'PATCH'));
+        $data['form'] = $form->createView();
+
+        if ($request->request->has('place')) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $place = $form->getData();
+                $this->savePlaceData($place);
+            }
+        }
+
+        $imageForm = $this->createForm(ImageAddType::class);
+        $data['imageForm'] = $imageForm->createView();
+
+        if ($request->request->has('image_add')) {
+            $imageForm->handleRequest($request);
+            if ($imageForm->isSubmitted() && $imageForm->isValid()) {
+                $image = $imageForm->getData();
+                $image->addPlace($place);
+                $imageFile = $image->getImageFile();
+                if ($imageFile) {
+                    $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
+                    $imageFile->move(
+                        $this->getParameter('placeImage_directory'),
+                        $imageName
+                    );
+                    $image->setImageName($imageName);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($image);
+                    $em->flush();
+                }
+            }
+
+        }
+
+
+        return $this->render($template, $data);
+    }
+
+    /**
      * @Route("/place/{slug}-{id}",
      *          requirements={
      *              "slug" = "[^/]+",
@@ -54,46 +127,7 @@ class PlaceController extends Controller
         }
         $data['place'] = $place;
 
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $securityContext */
-        $securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') == true) {
-            $template = 'AppBundle:Place:placeEdit.html.twig';
 
-            $form = $this->createForm(PlaceType::class, $place, array('method' => 'PATCH'));
-            $data['form'] = $form->createView();
-
-            if ($request->request->has('place')) {
-                $form->handleRequest($request);
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $place = $form->getData();
-                    $this->savePlaceData($place);
-                }
-            }
-
-            $imageForm = $this->createForm(ImageAddType::class);
-            $data['imageForm'] = $imageForm->createView();
-
-            if ($request->request->has('image_add')) {
-                $imageForm->handleRequest($request);
-                if ($imageForm->isSubmitted() && $imageForm->isValid()) {
-                    $image = $imageForm->getData();
-                    $image->addPlace($place);
-                    $imageFile = $image->getImageFile();
-                    if ($imageFile) {
-                        $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
-                        $imageFile->move(
-                            $this->getParameter('placeImage_directory'),
-                            $imageName
-                        );
-                        $image->setImageName($imageName);
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($image);
-                        $em->flush();
-                    }
-                }
-
-            }
-        }
 
         return $this->render($template, $data);
     }
