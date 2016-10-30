@@ -157,6 +157,17 @@ class PlaceController extends Controller
                 'Your place is going to be validated by our staff'
             );
             $redirectUrl = $this->generateUrl('homepage');
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Where-to-brunch')
+                ->setFrom('info@where-to-brunch.com')
+                ->setTo('lambeletjp@gmail.com')
+                ->setBody(
+                    'Somebody added a new place'
+                )
+            ;
+            $this->get('mailer')->send($message);
+
             return $this->redirect($redirectUrl);
         }
         return $this->render('AppBundle:Place:form.html.twig'
@@ -212,7 +223,6 @@ class PlaceController extends Controller
         }
         $em->persist($place);
         $em->flush();
-
     }
 
 
