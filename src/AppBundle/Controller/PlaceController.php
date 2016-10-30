@@ -8,6 +8,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Place;
 use AppBundle\Entity\PlaceImage;
@@ -153,7 +154,7 @@ class PlaceController extends Controller
             $this->savePlaceData($place);
             $this->addFlash(
                 'notice',
-                'Your new place is going to be validate by our staff'
+                'Your place is going to be validated by our staff'
             );
             $redirectUrl = $this->generateUrl('homepage');
             return $this->redirect($redirectUrl);
@@ -184,7 +185,7 @@ class PlaceController extends Controller
         return $this->render('AppBundle:Place:findLocation.html.twig', ['currentAddress' => $currentAddress]);
     }
 
-    public function savePlaceData($place)
+    public function savePlaceData(Place $place)
     {
         /** @var \Geocoder\Model\AddressCollection $addressCollection */
         $addressCollection = $this->getDoctrine()
@@ -198,7 +199,7 @@ class PlaceController extends Controller
         }
         $em = $this->getDoctrine()->getManager();
         /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
-        foreach ($place->getImages() as $image) {
+        foreach ($place->getAllImages() as $image) {
             $imageFile = $image->getImageFile();
             if ($imageFile) {
                 $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();

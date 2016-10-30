@@ -422,6 +422,14 @@ class Place
         return $images;
     }
 
+    public function getAllImages(){
+        $images= new ArrayCollection();
+        foreach($this->images as $image){
+            $images->add($image);
+        }
+        return $images;
+    }
+
     public function getImageTeaser(){
         $image = $this->images->first();
         if(!$image){
