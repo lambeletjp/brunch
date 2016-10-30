@@ -237,6 +237,10 @@ a,a:visited,a:hover,a:active {
     text-decoration: underline;
 }
 
+.add_Image_link:hover{
+    text-decoration: underline;
+}
+
 #image_add_imageFile{
     margin-top: 12px;
     line-height: 10px;

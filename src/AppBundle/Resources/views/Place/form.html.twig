@@ -6,7 +6,8 @@
 {% block body %}
     <div class="container">
         <row>
-            <h2>New location</h2>
+            <div class="col-sm-12"><h1>New location</h1></div>
+        <br/>
         </row>
         <row>
             {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
@@ -20,8 +21,10 @@
             {{ form_row(form.price) }}
             {{ form_row(form.hasBuffet) }}
 
-
-            <h3>Brunch time</h3>
+            <hr class="col-sm-12">
+        </row>
+        <row>
+            <h3 class="col-sm-12">Brunch time</h3>
             <div class="hidden-sm col-md-1"></div>
             <div class="brunch_time brunch_time_edit col-sm-9 col-md-8">
                 <div class="table-responsive">
@@ -73,11 +76,22 @@
                     </table>
                 </div>
             </div>
-            <div class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
-            </div>
-            {{ form_row(form._token) }}
-            {{ form_row(form.save) }}
+            <hr class="col-sm-12">
         </row>
+        <row>
+            <h3 class="col-sm-12">Images</h3>
+            <div class="images col-sm-12" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+            </div>
+            <hr class="col-sm-12">
+        </row>
+        <row>
+            {{ form_row(form._token) }}
+            <div class="col-sm-4">
+                <button type="submit" id="place_save" name="place[save]" class="save btn">Save</button>
+            </div>
+            <div class="col-sm-8"></div>
+        </row>
+
     </div>
 
 <script>
