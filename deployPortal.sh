@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+git pull
 php composer.phar install
 php bin/console cache:clear
 php bin/console cache:clear -e prod

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+git pull
 /usr/bin/php5.5-cli composer.phar install
 /usr/bin/php5.5-cli bin/console cache:clear
 /usr/bin/php5.5-cli bin/console cache:clear -e prod
