@@ -6,7 +6,8 @@ p {
     margin: 0 0 20px;
 }
 
-a,a:visited,a:hover,a:active {
+.navbar a,.navbar a:visited,.navbar a:hover,.navbar a:active,
+.place-teaser a,.place-teaser a:visited,.place-teaser a:hover,.place-teaser a:active {
     text-decoration: none;
     color: inherit;
 }
