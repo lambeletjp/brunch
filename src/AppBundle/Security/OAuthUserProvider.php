@@ -41,7 +41,7 @@ class OAuthUserProvider extends BaseClass
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
-        $email = $response->getEmail() ? $response->getEmail() : '';
+        $email = $response->getEmail() ? $response->getEmail() : $username;
         $nickname = $response->getNickname();
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
