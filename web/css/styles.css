@@ -16,11 +16,8 @@ p a:hover{
     color: #428bca;
 }
 
-
-
 a, a:visited,a:hover,a:active{
     text-decoration: none;
-    color: inherit;
 }
 
 .navbar {
@@ -271,4 +268,9 @@ a, a:visited,a:hover,a:active{
 
 .place{
     margin-top: 20px;
+}
+
+.social-login{
+    max-height: 50px;
+    display: block;
 }

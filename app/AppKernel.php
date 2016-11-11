@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new FOS\CommentBundle\FOSCommentBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
 
 
         ];

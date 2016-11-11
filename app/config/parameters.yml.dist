@@ -20,3 +20,7 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
     placeimage_directory: '%kernel.root_dir%/../web/uploads/placesImages'
+    facebook_client_id: ~
+    facebook_client_secret: ~
+    google_client_id: ~
+    google_client_secret: ~

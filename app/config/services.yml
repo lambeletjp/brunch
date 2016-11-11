@@ -17,3 +17,7 @@ services:
         arguments: [~, AppBundle\Entity\Image, ~]
         tags:
             - { name: sonata.admin, manager_type: orm, label: Image }
+
+    app.provider.oauth:
+        class: AppBundle\Security\OAuthUserProvider
+        arguments: ['@fos_user.user_manager',{facebook: facebook_id, google: google_id}]
