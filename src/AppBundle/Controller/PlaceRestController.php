@@ -58,7 +58,7 @@ class PlaceRestController extends Controller
         return round($distance, $decimals);
     }
 
-    function findPointToDisctant($point_lat,$point_long,$distance)
+    function findPointToDistance($point_lat,$point_long,$distance)
     {
         $degrees = 0.05;
         $distance = 5;

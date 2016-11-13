@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: imagine.yml }
+    - { resource: version.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -31,7 +32,15 @@ framework:
         save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
-    assets: ~
+    assets:
+        packages:
+          css:
+            version: %assets_version%
+            version_format: %%s?%%s
+          js:
+          js:
+            version: %assets_version%
+            version_format: %%s?%%s
 
 # Twig Configuration
 twig:

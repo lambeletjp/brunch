@@ -140,11 +140,6 @@ class PlaceController extends Controller
      */
     public function formPlaceAction(Request $request)
     {
-        $securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') != true) {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
-        }
-
         $form = $this->createForm(PlaceType::class);
 
         $form->handleRequest($request);
@@ -185,13 +180,15 @@ class PlaceController extends Controller
     public function findLocationAction(Request $request)
     {
         $address = $request->get('address');
+        $currentAddress=null;
+        if($address) {
+            /** @var \Geocoder\Model\AddressCollection $addressCollection */
+            $addressCollection = $this->getDoctrine()
+                ->getRepository('AppBundle:Place')
+                ->getGoogleAddress($address);
 
-        /** @var \Geocoder\Model\AddressCollection $addressCollection */
-        $addressCollection = $this->getDoctrine()
-            ->getRepository('AppBundle:Place')
-            ->getGoogleAddress($address);
-
-        $currentAddress = $addressCollection->first();
+            $currentAddress = $addressCollection->first();
+        }
 
         return $this->render('AppBundle:Place:findLocation.html.twig', ['currentAddress' => $currentAddress]);
     }

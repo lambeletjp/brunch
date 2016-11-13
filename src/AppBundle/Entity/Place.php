@@ -177,6 +177,17 @@ class Place
      */
     protected $sundayStop;
 
+    /**
+     *
+     * @ORM\Column(name="mondayStart", type="time", nullable=true)
+     */
+    protected $weekStart;
+    /**
+     *
+     * @ORM\Column(name="mondayStop", type="time", nullable=true)
+     */
+    protected $weekStop;
+
 
     /**
      *
@@ -748,6 +759,39 @@ class Place
         $this->approved = $approved;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getWeekStart()
+    {
+        return $this->weekStart;
+    }
+
+    /**
+     * @param mixed $weekStart
+     */
+    public function setWeekStart($weekStart)
+    {
+        $this->weekStart = $weekStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeekStop()
+    {
+        return $this->weekStop;
+    }
+
+    /**
+     * @param mixed $weekStop
+     */
+    public function setWeekStop($weekStop)
+    {
+        $this->weekStop = $weekStop;
+    }
+
+    
 
 
     
