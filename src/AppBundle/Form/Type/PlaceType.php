@@ -26,20 +26,14 @@ class PlaceType extends AbstractType
             ->add('address', TextType::class)
             ->add('postalCode', NumberType::class)
             ->add('city', TextType::class)
-            ->add('price', MoneyType::class)
+            ->add('price', MoneyType::class, array(
+                    'required' => false
+                ))
             ->add('hasBuffet', CheckboxType::class, array(
                 'required' => false
             ))
-            ->add('mondayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('mondayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('tuesdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('tuesdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('wednesdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('wednesdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('thursdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('thursdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('fridayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('fridayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('weekStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('weekStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
             ->add('saturdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
             ->add('saturdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
             ->add('sundayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))

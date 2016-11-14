@@ -21,3 +21,14 @@ services:
     app.provider.oauth:
         class: AppBundle\Security\OAuthUserProvider
         arguments: ['@fos_user.user_manager',{facebook: facebook_id, google: google_id}]
+
+    app.curlAdapter:
+      class: Ivory\HttpAdapter\CurlHttpAdapter
+
+    app.google.maps:
+        class: Geocoder\Provider\GoogleMaps
+        arguments: ['@app.curlAdapter',null,null,false, %google_geo_api_key%]
+
+    app.place.repositor:
+        class: AppBundle\Repository\PlaceRepository
+        arguments: ['@app.google.maps']

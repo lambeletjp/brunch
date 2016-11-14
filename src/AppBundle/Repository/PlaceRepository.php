@@ -26,7 +26,7 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
     public function getGoogleAddress($address)
     {
         $curl     = new CurlHttpAdapter();
-        $geocoder = new GoogleMaps($curl);
+        $geocoder = new GoogleMaps($curl,null,null,true,'AIzaSyAFCc3RQIkAfbw4POE2ke7iq-BqNvD6ZDQ');
         return $geocoder->geocode($address);
     }
 

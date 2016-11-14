@@ -24,3 +24,4 @@ parameters:
     facebook_client_secret: ~
     google_client_id: ~
     google_client_secret: ~
+    google_geo_api_key: ~

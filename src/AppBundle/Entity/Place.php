@@ -179,19 +179,19 @@ class Place
 
     /**
      *
-     * @ORM\Column(name="mondayStart", type="time", nullable=true)
+     * @ORM\Column(name="weekStart", type="time", nullable=true)
      */
     protected $weekStart;
     /**
      *
-     * @ORM\Column(name="mondayStop", type="time", nullable=true)
+     * @ORM\Column(name="weekStop", type="time", nullable=true)
      */
     protected $weekStop;
 
 
     /**
      *
-     * @ORM\Column(name="price", type="float")
+     * @ORM\Column(name="price", type="float", nullable=true)
      */
     protected $price;
 
