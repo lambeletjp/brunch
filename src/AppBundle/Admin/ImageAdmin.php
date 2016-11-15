@@ -30,7 +30,8 @@ class ImageAdmin extends AbstractAdmin
 
     protected function configureListFields(ListMapper $listMapper)
     {
-        $listMapper->addIdentifier('imageName');
-        $listMapper->addIdentifier('approved');
+        $listMapper->addIdentifier('imageName')
+        ->add('imageUrl', null, array('template' => 'AppBundle:Admin:list_image.html.twig'))
+        ->addIdentifier('approved');
     }
 }

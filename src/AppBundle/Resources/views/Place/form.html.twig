@@ -9,6 +9,7 @@
             <div class="col-sm-12"><h1>New location</h1></div>
         <br/>
         </row>
+        <div class="col-md-10">
         <row>
             {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
             {# {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %} #}
@@ -18,9 +19,24 @@
             {{ form_row(form.address) }}
             {{ form_row(form.postalCode) }}
             {{ form_row(form.city) }}
-            {{ form_row(form.price) }}
+            {{ form_row(form.country) }}
+            <div class="form-group"><label class="col-sm-2 control-label" for="place_priceStart">Price range</label>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">€ </span>
+                        <input type="number" id="place_priceStart" name="place[priceStart]" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">€ </span>
+                        <input type="number" id="place_priceEnd" name="place[priceEnd]" class="form-control">
+                    </div>
+                </div>
+            </div>
             {{ form_row(form.hasBuffet) }}
-
+            </div>
             <hr class="col-sm-12">
         </row>
         <row>

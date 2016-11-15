@@ -45,11 +45,18 @@
                                 <td><input type="checkbox" {% if place.hasBuffet %}checked{% endif %} disabled></td>
                             </tr>
                             <tr>
-                                <th>Price</th>
+                                <th>Price range</th>
                                 <td>
                                     <div class="input-group">
                                         <span class="input-group-addon">€ </span>
-                                        <input type="text" class="form-control" value="{{ place.price }}" disabled>
+                                        <input type="text" class="form-control" value="{{ place.priceStart }}" disabled>
+                                    </div>
+                                </td>
+                                <td>-</td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">€ </span>
+                                        <input type="text" class="form-control" value="{{ place.priceEnd }}" disabled>
                                     </div>
                                 </td>
                             </tr>

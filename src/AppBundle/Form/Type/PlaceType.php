@@ -26,9 +26,13 @@ class PlaceType extends AbstractType
             ->add('address', TextType::class)
             ->add('postalCode', NumberType::class)
             ->add('city', TextType::class)
-            ->add('price', MoneyType::class, array(
+            ->add('country', TextType::class)
+            ->add('priceStart', MoneyType::class, array(
                     'required' => false
                 ))
+            ->add('priceEnd', MoneyType::class, array(
+                'required' => false
+            ))
             ->add('hasBuffet', CheckboxType::class, array(
                 'required' => false
             ))

@@ -64,6 +64,14 @@ class Place
     /**
      * @var string
      *
+     * @ORM\Column(name="country", type="string", length=255)
+     * @Expose
+     */
+    private $country;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="siteweb", type="string", length=255, nullable=true)
      *
      */
@@ -101,61 +109,6 @@ class Place
 
     /**
      *
-     * @ORM\Column(name="mondayStart", type="time", nullable=true)
-     */
-    protected $mondayStart;
-    /**
-     *
-     * @ORM\Column(name="mondayStop", type="time", nullable=true)
-     */
-    protected $mondayStop;
-
-    /**
-     *
-     * @ORM\Column(name="tuesdayStart", type="time", nullable=true)
-     */
-    protected $tuesdayStart;
-    /**
-     *
-     * @ORM\Column(name="tuesdayStop", type="time", nullable=true)
-     */
-    protected $tuesdayStop;
-
-    /**
-     *
-     * @ORM\Column(name="wednesdayStart", type="time", nullable=true)
-     */
-    protected $wednesdayStart;
-    /**
-     *
-     * @ORM\Column(name="wednesdayStop", type="time", nullable=true)
-     */
-    protected $wednesdayStop;
-
-    /**
-     *
-     * @ORM\Column(name="thursdayStart", type="time", nullable=true)
-     */
-    protected $thursdayStart;
-    /**
-     *
-     * @ORM\Column(name="thursdayStop", type="time", nullable=true)
-     */
-    protected $thursdayStop;
-
-    /**
-     *
-     * @ORM\Column(name="fridayStart", type="time", nullable=true)
-     */
-    protected $fridayStart;
-    /**
-     *
-     * @ORM\Column(name="fridayStop", type="time", nullable=true)
-     */
-    protected $fridayStop;
-
-    /**
-     *
      * @ORM\Column(name="saturdayStart", type="time", nullable=true)
      */
     protected $saturdayStart;
@@ -188,12 +141,23 @@ class Place
      */
     protected $weekStop;
 
-
     /**
      *
      * @ORM\Column(name="price", type="float", nullable=true)
      */
     protected $price;
+
+    /**
+     *
+     * @ORM\Column(name="priceStart", type="float", nullable=true)
+     */
+    protected $priceStart;
+
+    /**
+     *
+     * @ORM\Column(name="priceEnd", type="float", nullable=true)
+     */
+    protected $priceEnd;
 
     /**
      *
@@ -490,166 +454,6 @@ class Place
     /**
      * @return mixed
      */
-    public function getMondayStart()
-    {
-        return $this->mondayStart;
-    }
-
-    /**
-     * @param mixed $mondayStart
-     */
-    public function setMondayStart($mondayStart)
-    {
-        $this->mondayStart = $mondayStart;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMondayStop()
-    {
-        return $this->mondayStop;
-    }
-
-    /**
-     * @param mixed $mondayStop
-     */
-    public function setMondayStop($mondayStop)
-    {
-        $this->mondayStop = $mondayStop;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTuesdayStart()
-    {
-        return $this->tuesdayStart;
-    }
-
-    /**
-     * @param mixed $tuesdayStart
-     */
-    public function setTuesdayStart($tuesdayStart)
-    {
-        $this->tuesdayStart = $tuesdayStart;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTuesdayStop()
-    {
-        return $this->tuesdayStop;
-    }
-
-    /**
-     * @param mixed $tuesdayStop
-     */
-    public function setTuesdayStop($tuesdayStop)
-    {
-        $this->tuesdayStop = $tuesdayStop;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWednesdayStart()
-    {
-        return $this->wednesdayStart;
-    }
-
-    /**
-     * @param mixed $wednesdayStart
-     */
-    public function setWednesdayStart($wednesdayStart)
-    {
-        $this->wednesdayStart = $wednesdayStart;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWednesdayStop()
-    {
-        return $this->wednesdayStop;
-    }
-
-    /**
-     * @param mixed $wednesdayStop
-     */
-    public function setWednesdayStop($wednesdayStop)
-    {
-        $this->wednesdayStop = $wednesdayStop;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getThursdayStart()
-    {
-        return $this->thursdayStart;
-    }
-
-    /**
-     * @param mixed $thursdayStart
-     */
-    public function setThursdayStart($thursdayStart)
-    {
-        $this->thursdayStart = $thursdayStart;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getThursdayStop()
-    {
-        return $this->thursdayStop;
-    }
-
-    /**
-     * @param mixed $thursdayStop
-     */
-    public function setThursdayStop($thursdayStop)
-    {
-        $this->thursdayStop = $thursdayStop;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFridayStart()
-    {
-        return $this->fridayStart;
-    }
-
-    /**
-     * @param mixed $fridayStart
-     */
-    public function setFridayStart($fridayStart)
-    {
-        $this->fridayStart = $fridayStart;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFridayStop()
-    {
-        return $this->fridayStop;
-    }
-
-    /**
-     * @param mixed $fridayStop
-     */
-    public function setFridayStop($fridayStop)
-    {
-        $this->fridayStop = $fridayStop;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getSaturdayStart()
     {
         return $this->saturdayStart;
@@ -709,22 +513,6 @@ class Place
     public function setSundayStop($sundayStop)
     {
         $this->sundayStop = $sundayStop;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param mixed $price
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
     }
 
     /**
@@ -790,6 +578,55 @@ class Place
     {
         $this->weekStop = $weekStop;
     }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string $country
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriceStart()
+    {
+        return $this->priceStart;
+    }
+
+    /**
+     * @param mixed $priceStart
+     */
+    public function setPriceStart($priceStart)
+    {
+        $this->priceStart = $priceStart;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPriceEnd()
+    {
+        return $this->priceEnd;
+    }
+
+    /**
+     * @param mixed $priceEnd
+     */
+    public function setPriceEnd($priceEnd)
+    {
+        $this->priceEnd = $priceEnd;
+    }
+
 
     
 
