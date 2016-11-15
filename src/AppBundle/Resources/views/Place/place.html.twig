@@ -69,46 +69,11 @@
                             </tr>
                             </thead>
                             <tbody>
-                            {% if place.mondayStart|date("H:i") != '00:00' %}
+                            {% if place.weekStart|date("H:i") != '00:00' %}
                                 <tr>
-                                    <th>Monday</th>
-                                    <td>{{ place.mondayStart|date("H:i") }}</td>
-                                    <td>{{ place.mondayStop|date("H:i") }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if place.tuesdayStart|date("H:i") != '00:00' %}
-                                <tr>
-                                    <th>Tuesday</th>
-                                    <td>{{ place.tuesdayStart|date("H:i") }}</td>
-                                    <td>{{ place.tuesdayStop|date("H:i") }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if place.wednesdayStart|date("H:i") != '00:00' %}
-                                <tr>
-                                    <th>Wednesday</th>
-                                    <td>{{ place.wednesdayStart|date("H:i") }}</td>
-                                    <td>{{ place.wednesdayStop|date("H:i") }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if place.mondayStart|date("H:i") != '00:00' %}
-                                <tr>
-                                    <th>Monday</th>
-                                    <td>{{ place.mondayStart|date("H:i") }}</td>
-                                    <td>{{ place.mondayStop|date("H:i") }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if place.thursdayStart|date("H:i") != '00:00' %}
-                                <tr>
-                                    <th>Thursday</th>
-                                    <td>{{ place.thursdayStart|date("H:i") }}</td>
-                                    <td>{{ place.thursdayStop|date("H:i") }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if place.fridayStart|date("H:i") != '00:00' %}
-                                <tr>
-                                    <th>Friday</th>
-                                    <td>{{ place.fridayStart|date("H:i") }}</td>
-                                    <td>{{ place.fridayStop|date("H:i") }}</td>
+                                    <th>During the week</th>
+                                    <td>{{ place.weekStart|date("H:i") }}</td>
+                                    <td>{{ place.weekStop|date("H:i") }}</td>
                                 </tr>
                             {% endif %}
                             {% if place.saturdayStart|date("H:i") != '00:00' %}

@@ -274,3 +274,9 @@ a, a:visited,a:hover,a:active{
     max-height: 50px;
     display: block;
 }
+
+.navbar-username{
+    float: right;
+    padding: 25px 15px;
+    line-height: 20px;
+}
