@@ -24,7 +24,7 @@ class HomepageController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $places = $this->getDoctrine()->getRepository('AppBundle:Place')->findBy(['approved' => 1],null,10);
+        $places = $this->getDoctrine()->getRepository('AppBundle:Place')->findBy(['approved' => 1],['id' => 'DESC'],10);
         return $this->render('AppBundle:Homepage:homepage.html.twig',['places' => $places]);
     }
 }
