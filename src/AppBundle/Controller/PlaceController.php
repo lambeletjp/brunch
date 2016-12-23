@@ -180,6 +180,9 @@ class PlaceController extends Controller
     public function findLocationAction(Request $request)
     {
         $address = $request->get('address');
+        $city  = $request->get('city');
+        $country  = $request->get('country');
+        $address = $address ? $address : $city . ' ' . $country;
         $currentAddress=null;
         if($address) {
             /** @var \Geocoder\Model\AddressCollection $addressCollection */

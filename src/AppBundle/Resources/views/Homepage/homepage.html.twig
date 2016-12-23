@@ -5,6 +5,7 @@
 
 {% block body %}
     <div class="container">
+        <div class="col-sm-12 col-md-8">
         <row>
             <h2>Find a brunch</h2>
             <p>Hungry? And you really want to have a brunch or breakfast?</p>
@@ -27,6 +28,12 @@
         {% for place in places %}
             {% include 'AppBundle:Place:placeTeaser.html.twig' with {'place': place} only %}
         {% endfor %}
+        </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4">
+            <div class="sidebar-nav-fixed pull-right affix">
+                {% include 'AppBundle:Place:search.html.twig' %}
+            </div>
         </div>
     </div>
 {% endblock %}

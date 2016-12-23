@@ -8,7 +8,7 @@ function initMap() {
     if(mapDiv) {
         var map = new google.maps.Map(mapDiv, {
             center: coords,
-            zoom: 14
+            zoom: 13
         });
 
         var url = '/api/places?lat=' + coords.lat + '&lng=' + coords.lng;
@@ -49,7 +49,7 @@ function initMapPlace() {
         var coords = {'lat': latitude, 'lng': longitude};
         var map = new google.maps.Map(mapDiv, {
             center: coords,
-            zoom: 14
+            zoom: 13
         });
         var marker = new google.maps.Marker({
             position: coords,
@@ -128,4 +128,5 @@ $(document).on('ready', function() {
 
     initMapPlace();
     initMap();
+
 });
