@@ -267,7 +267,7 @@ class PlaceController extends Controller
 
         $place = new Place();
         $place->setName($name);
-        $place->setAddress($currentAddress->getStreetName() . ',' . $currentAddress->getStreetNumber());
+        $place->setAddress($currentAddress->getStreetName() . ' ' . $currentAddress->getStreetNumber());
         $place->setCity($currentAddress->getLocality());
         $place->setPostalCode($currentAddress->getPostalCode());
         $place->setLongitude($currentAddress->getLongitude());
