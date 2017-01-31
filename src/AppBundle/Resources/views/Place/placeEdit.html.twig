@@ -16,94 +16,97 @@
             </div>
         {% endfor %}
     </section>
-    <div class="imageForm container place">
-        <div class="row">
-        {% form_theme imageForm 'bootstrap_3_horizontal_layout.html.twig' %}
-        {{ form_start(imageForm) }}
-        <div class="col-sm-4">{{ form_widget(imageForm.imageFile) }}</div>
-        <div class="col-sm-3">{{ form_widget(imageForm.save,{ 'label': 'Add an image' }) }}</div>
-        {{ form_end(imageForm) }}
-        </div>
-    </div>
 
     {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
     <div class="container">
         {{ form_start(form) }}
         {{ form_widget(form._token) }}
-        <div>
-            <div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-4 col-md-3">
-                        {% include 'AppBundle:Place:mapPlace.html.twig' %}
-                    </div>
-                    <div class="col-xs-12 col-sm-5 col-md-6">
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                {% include 'AppBundle:Place:mapPlace.html.twig' %}
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-6">
                 <h1>{{ place.name }}</h1>
                 <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
-                        </div>
-                </div>
-                <div class="brunch_info">
-                    <h3>Informations</h3>
-                    <div class="table-responsive">
-                        <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th>Has a Buffet?</th>
-                                    <td>
-                                        {{ form_widget(form.hasBuffet) }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Price</th>
-                                    <td>
-                                        <div class="input-group">
-                                            {{ form_widget(form.price) }}
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6">
+                <h3 class="main-title">Informations</h3>
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ form_widget(form.hasBuffet) }}
+                    </div>
+                    <div class="col-xs-12">
+                        <h4>Prices range</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <label>From</label>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_widget(form.priceStart) }}
+                    </div>
+                    <div class="col-xs-1">
+                        <label>To</label>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_widget(form.priceEnd) }}
                     </div>
                 </div>
-                <div class="brunch_time brunch_time_edit">
-                    <h3>Brunch time</h3>
-                    <div class="table-responsive">
-                        <table class="table">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Begin</th>
-                                    <th>End</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th>During the week</th>
-                                    <td>{{ form_widget(form.weekStart) }}</td>
-                                    <td>{{ form_widget(form.weekStop) }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Saturday</th>
-                                    <td>{{ form_widget(form.saturdayStart) }}</td>
-                                    <td>{{ form_widget(form.saturdayStop) }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Sunday</th>
-                                    <td>{{ form_widget(form.sundayStart) }}</td>
-                                    <td>{{ form_widget(form.sundayStop) }}</td>
-                                </tr>
-                                </tbody>
-                        </table>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <h3 class="main-title">Brunch times</h3>
+                <div class="row">
+                    <div class="col-xs-0 col-sm-6">
+                        <h4>Begin</h4>
+                    </div>
+                    <div class="col-xs-0 col-sm-6">
+                        <h4>End</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <h5>During the week</h5>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.weekStart) }}
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.weekStop) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <h5>Saturday</h5>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.saturdayStart) }}
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.saturdayStop) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <h5>Sunday</h5>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.sundayStart) }}
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.sundayStop) }}
                     </div>
                 </div>
             </div>
         </div>
         {{ form_widget(form.save) }}
+    </div>
+
+
+    <div class="imageForm container place">
+        <div class="row">
+            <div class="col-xs-12 main-title"><h2>Images</h2></div>
+            {% form_theme imageForm 'bootstrap_3_horizontal_layout.html.twig' %}
+            {{ form_start(imageForm) }}
+            <div class="col-sm-4">{{ form_widget(imageForm.imageFile) }}</div>
+            <div class="col-sm-3">{{ form_widget(imageForm.save,{ 'label': 'Add an image' }) }}</div>
+            {{ form_end(imageForm) }}
+        </div>
     </div>
 {% endblock %}

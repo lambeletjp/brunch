@@ -5,34 +5,39 @@
 
 {% block body %}
     <div class="container">
-        <div class="col-sm-12 col-md-8">
-        <row>
-            <h2>Find a brunch</h2>
-            <p>Hungry? And you really want to have a brunch or breakfast?</p>
-            <p>Just give the address where you are and get the list of the best restaurants or cafes around your area in all the cities, states and countries in the world so you can find a good brunch or breakfast.</p>
-            <div class="row">
-                {% include 'AppBundle:Place:searchForm.html.twig' %}
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="main-title">Find a brunch</h2>
             </div>
-            <br/>
-            <hr/>
-        </row>
-        <row>
-            <h2>Add a brunch location</h2>
-            <p>You are a brunch expert and you already know places but they are not on the website?</p>
-            <p><a href="{{ path('place_form') }}">Add your favorite place</a> to help other people discover this brunch or breakfast.</p>
-            <br/>
-            <hr/>
-        </row>
-        <h2>Last added brunch</h2>
-        <div class="row list-places">
-        {% for place in places %}
-            {% include 'AppBundle:Place:placeTeaser.html.twig' with {'place': place} only %}
-        {% endfor %}
-        </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-4">
-            <div class="sidebar-nav-fixed pull-right affix">
+            <div class="col-xs-12 col-sm-8 col-md-8">
+                <p>Hungry? And you really want to have a brunch or breakfast?</p>
+                <p>Just give the address where you are and get the list of the best restaurants or cafes around your
+                    area in all the cities, states and countries in the world so you can find a good brunch or
+                    breakfast.</p>
+            </div>
+            <div class="col-xs-12 col-sm-4 col-md-4">
                 {% include 'AppBundle:Place:search.html.twig' %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="main-title">Add a brunch location</h2>
+            </div>
+            <div class="col-sm-6 col-md-8">
+                <p>You are a brunch expert and you already know places but they are not on the website?</p>
+                <p><a href="{{ path('place_form') }}">Add your favorite place</a> to help other people discover this
+                    brunch or breakfast.</p>
+                </div>
+            <div class="col-sm-6 col-md-4">
+                {% include 'AppBundle:Sidebar:addPlaceQuick.html.twig' %}
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="main-title">Last added brunch</h2>
+                </div>
+                {% for place in places %}
+                    {% include 'AppBundle:Place:placeTeaser.html.twig' with {'place': place} only %}
+                {% endfor %}
             </div>
         </div>
     </div>

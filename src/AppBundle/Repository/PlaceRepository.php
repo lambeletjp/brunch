@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 use AppBundle\Entity\Place;
+use Doctrine\Common\Collections\ArrayCollection;
 use Geocoder\Model\AddressCollection;
 use Geocoder\Provider\GoogleMaps;
 use Ivory\HttpAdapter\CurlHttpAdapter;
@@ -25,9 +26,13 @@ class PlaceRepository extends \Doctrine\ORM\EntityRepository
 
     public function getGoogleAddress($address)
     {
-        $curl     = new CurlHttpAdapter();
-        $geocoder = new GoogleMaps($curl,null,null,true,'AIzaSyAFCc3RQIkAfbw4POE2ke7iq-BqNvD6ZDQ');
-        return $geocoder->geocode($address);
+        try {
+            $curl = new CurlHttpAdapter();
+            $geocoder = new GoogleMaps($curl, null, null, true, 'AIzaSyAFCc3RQIkAfbw4POE2ke7iq-BqNvD6ZDQ');
+            return $geocoder->geocode($address);
+        }catch (\Exception $e){
+            return new ArrayCollection();
+        }
     }
 
     public function geoFormat(Array $places){

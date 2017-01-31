@@ -36,12 +36,12 @@ class PlaceType extends AbstractType
             ->add('hasBuffet', CheckboxType::class, array(
                 'required' => false
             ))
-            ->add('weekStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('weekStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('saturdayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('saturdayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('sundayStart', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
-            ->add('sundayStop', TimeType::class, array('required' => false, 'data' => new DateTime('00:00:00')))
+            ->add('weekStart', TimeType::class, array('widget'=> 'single_text', 'required' => false))
+            ->add('weekStop', TimeType::class, array('widget'=> 'single_text', 'required' => false))
+            ->add('saturdayStart', TimeType::class, array('widget'=> 'single_text', 'required' => false))
+            ->add('saturdayStop', TimeType::class, array('widget'=> 'single_text', 'required' => false))
+            ->add('sundayStart', TimeType::class, array('widget'=> 'single_text', 'required' => false))
+            ->add('sundayStop', TimeType::class, array('widget'=> 'single_text', 'required' => false))
             ->add('images', CollectionType::class, array(
                 'entry_type' => ImageType::class,
                 'allow_add' => true,

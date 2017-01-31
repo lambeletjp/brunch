@@ -103,7 +103,7 @@ class Place
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hasBuffet", type="boolean")
+     * @ORM\Column(name="hasBuffet", type="boolean", nullable=true)
      */
     protected $hasBuffet;
 

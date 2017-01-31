@@ -41,17 +41,9 @@ class PlaceController extends Controller
      */
     public function editAction($slug, $id, Request $request)
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $securityContext */
-        $securityContext = $this->container->get('security.authorization_checker');
-        if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED') != true) {
-            $this->redirect($this->generateUrl('place',['slug'=>$slug,'id' => $id]));
-        }
-
         $data = [];
-
-
         $id = intval($id);
-        $place = $this->getDoctrine()->getRepository('AppBundle:Place')->findOneBy(['id' => $id, 'approved' => 1], null, 10);
+        $place = $this->getDoctrine()->getRepository('AppBundle:Place')->findOneBy(['id' => $id], null, 10);
         if (!$place) {
             throw $this->createNotFoundException('404 - Seite nicht gefunden');
         }
@@ -92,6 +84,10 @@ class PlaceController extends Controller
                     $em = $this->getDoctrine()->getManager();
                     $em->persist($image);
                     $em->flush();
+                    $this->addFlash(
+                        'notice',
+                        'Your image is going to be validated by our staff'
+                    );
                 }
             }
 
@@ -153,15 +149,7 @@ class PlaceController extends Controller
             );
             $redirectUrl = $this->generateUrl('homepage');
 
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Where-to-brunch')
-                ->setFrom('info@where-to-brunch.com')
-                ->setTo('lambeletjp@gmail.com')
-                ->setBody(
-                    'Somebody added a new place'
-                )
-            ;
-            $this->get('mailer')->send($message);
+            $this->sendNotificationNewPlace();
 
             return $this->redirect($redirectUrl);
         }
@@ -198,16 +186,20 @@ class PlaceController extends Controller
 
     public function savePlaceData(Place $place)
     {
-        /** @var \Geocoder\Model\AddressCollection $addressCollection */
-        $addressCollection = $this->getDoctrine()
-            ->getRepository('AppBundle:Place')
-            ->getAddressCollection($place);
+        if(!$place->getLongitude() || !$place->getLatitude()) {
+            /** @var \Geocoder\Model\AddressCollection $addressCollection */
+            $addressCollection = $this->getDoctrine()
+                ->getRepository('AppBundle:Place')
+                ->getAddressCollection($place);
 
-        /** @var \Geocoder\Model\Coordinates $address */
-        if ($addressCollection->count() && $address = $addressCollection->get(0)) {
-            $place->setLongitude($address->getLongitude());
-            $place->setLatitude($address->getLatitude());
+            /** @var \Geocoder\Model\Coordinates $address */
+            if ($addressCollection->count() && $address = $addressCollection->get(0)) {
+                $place->setLongitude($address->getLongitude());
+                $place->setLatitude($address->getLatitude());
+            }
         }
+
+
         $em = $this->getDoctrine()->getManager();
         /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $image */
         foreach ($place->getAllImages() as $image) {
@@ -223,6 +215,80 @@ class PlaceController extends Controller
         }
         $em->persist($place);
         $em->flush();
+        return $place;
+    }
+
+    /**
+     * @Route("/quick-add-location", name="quick_add_location")
+     * @method POST
+     */
+    public function quickAddLocation(Request $request)
+    {
+        $name = $request->get('name');
+        $street = $request->get('street');
+        $city = $request->get('city');
+        $country = $request->get('country');
+
+
+        $address = $name ? $name : '';
+        $address = $street ? $address . ' ' . $street: $address;
+        $address = $city ? $address . ' ' . $city: $address;
+        $address = $country ? $address . ' ' . $country : $address;
+
+        if(!$address){
+            return;
+        }
+        
+        /** @var \Geocoder\Model\AddressCollection $addressCollection */
+        $addressCollection = $this->getDoctrine()
+            ->getRepository('AppBundle:Place')
+            ->getGoogleAddress($address);
+
+        $currentAddress = $addressCollection->first();
+
+        if(!$currentAddress){
+            $address = $street ? $street: $address;
+            $address = $city ? $address . ' ' . $city: $address;
+            $address = $country ? $address . ' ' . $country : $address;
+            /** @var \Geocoder\Model\AddressCollection $addressCollection */
+            $addressCollection = $this->getDoctrine()
+                ->getRepository('AppBundle:Place')
+                ->getGoogleAddress($address);
+
+            $currentAddress = $addressCollection->first();
+            if(!$currentAddress) {
+                $this->addFlash(
+                    'notice',
+                    'No place was found with the adresse : ' . $address
+                );
+                return $this->redirect($this->generateUrl('homepage'));
+            }
+        }
+
+        $place = new Place();
+        $place->setName($name);
+        $place->setAddress($currentAddress->getStreetName() . ',' . $currentAddress->getStreetNumber());
+        $place->setCity($currentAddress->getLocality());
+        $place->setPostalCode($currentAddress->getPostalCode());
+        $place->setLongitude($currentAddress->getLongitude());
+        $place->setLatitude($currentAddress->getLatitude());
+        $place->setCountry($currentAddress->getCountry());
+
+        $place = $this->savePlaceData($place);
+        $this->sendNotificationNewPlace();
+        return $this->redirect($this->generateUrl('placeEdit',['slug' => $place->getSlug(), 'id' => $place->getId()]));
+    }
+
+    private function sendNotificationNewPlace()
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Where-to-brunch')
+            ->setFrom('info@where-to-brunch.com')
+            ->setTo('lambeletjp@gmail.com')
+            ->setBody(
+                'Somebody added a new place'
+            );
+        $this->get('mailer')->send($message);
     }
 
 

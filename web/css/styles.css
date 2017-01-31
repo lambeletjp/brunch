@@ -280,3 +280,9 @@ a, a:visited,a:hover,a:active{
     padding: 25px 15px;
     line-height: 20px;
 }
+
+.main-title{
+    background-color: beige;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
