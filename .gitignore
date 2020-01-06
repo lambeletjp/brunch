@@ -2,3 +2,20 @@
 .idea
 /vendor
 web/uploads/*
+
+
+###> symfony/framework-bundle ###
+/portal/.env.local
+/portal/.env.local.php
+/portal/.env.*.local
+/portal/config/secrets/prod/prod.decrypt.private.php
+/portal/public/bundles/
+/portal/var/
+/portal/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+/portal/.phpunit
+/portal/.phpunit.result.cache
+/portal/phpunit.xml
+###< symfony/phpunit-bridge ###
