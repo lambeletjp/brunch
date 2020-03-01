@@ -5,6 +5,10 @@ web/uploads/*
 
 
 ###> symfony/framework-bundle ###
+/portal5/*
+
+
+###> symfony/framework-bundle ###
 /portal/.env.local
 /portal/.env.local.php
 /portal/.env.*.local
@@ -19,3 +23,4 @@ web/uploads/*
 /portal/.phpunit.result.cache
 /portal/phpunit.xml
 ###< symfony/phpunit-bridge ###
+

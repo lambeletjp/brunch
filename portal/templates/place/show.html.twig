@@ -1,0 +1,108 @@
+{% extends 'layout.html.twig' %}
+
+
+{% block title %}Brunch{% endblock %}
+{% block teaserImage %}
+    <div class="jumbotron">
+        <div class="container">
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <section class="place_slider">
+        {% for image in place.images %}
+            <div>
+                <img src="{{ image.imageUrl }}" alt="{{ place.name }}">
+            </div>
+        {% endfor %}
+    </section>
+    <div class="container place">
+        <div>
+            <div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-4 col-md-3">
+                        {% include '/place/mapPlace.html.twig' %}
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-6">
+                        <h1>{{ place.name }}</h1>
+                        <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
+                    </div>
+                </div>
+                <div class="brunch_info">
+                    <h3>Informations</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>Has a Buffet?</th>
+                                <td><input type="checkbox" {% if place.hasBuffet %}checked{% endif %} disabled></td>
+                            </tr>
+                            <tr>
+                                <th>Price range</th>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">€ </span>
+                                        <input type="text" class="form-control" value="{{ place.priceStart }}" disabled>
+                                    </div>
+                                </td>
+                                <td>-</td>
+                                <td>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">€ </span>
+                                        <input type="text" class="form-control" value="{{ place.priceEnd }}" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="brunch_time">
+                    <h3>Brunch time</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Begin</th>
+                                <th>End</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if place.weekStart|date("H:i") != '00:00' %}
+                                <tr>
+                                    <th>During the week</th>
+                                    <td>{{ place.weekStart|date("H:i") }}</td>
+                                    <td>{{ place.weekStop|date("H:i") }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if place.saturdayStart|date("H:i") != '00:00' %}
+                                <tr>
+                                    <th>Saturday</th>
+                                    <td>{{ place.saturdayStart|date("H:i") }}</td>
+                                    <td>{{ place.saturdayStop|date("H:i") }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if place.sundayStart|date("H:i") != '00:00' %}
+                                <tr>
+                                    <th>Sunday</th>
+                                    <td>{{ place.sundayStart|date("H:i") }}</td>
+                                    <td>{{ place.sundayStop|date("H:i") }}</td>
+                                </tr>
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
