@@ -1,7 +1,10 @@
 vich_uploader:
     db_driver: orm
-
     mappings:
-        place:
-            uri_prefix: /uploads/places-images
-            upload_destination: '%kernel.project_dir%/public/images/placeImages'
+        place_image:
+            uri_prefix: /uploads/placeImages
+            upload_destination: '%kernel.project_dir%/public/uploads/placeImages'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+            namer: Vich\UploaderBundle\Naming\UniqidNamer

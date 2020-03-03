@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     googleMapApiKey: '%env(resolve:GOOGLE_MAP_API_KEY)%'
+    placeImage_directory: '%kernel.root_dir%/../public/uploads/placesImages'
 
 services:
     # default configuration for services in *this* file

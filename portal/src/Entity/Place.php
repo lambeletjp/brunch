@@ -505,7 +505,7 @@ class Place
      */
     public function addImage(Image $image)
     {
-        $image->addPlace($this);
+        $image->setPlace($this);
         $this->images->add($image);
     }
 

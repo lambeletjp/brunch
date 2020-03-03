@@ -9,6 +9,7 @@
 require('../css/app.css');
 require('../css/bootstrap.css');
 require('../css/styles.css');
+require('../lib/slick/slick.css');
 require('../lib/slick/slick-theme.css');
 
 

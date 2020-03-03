@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Place;
 use App\Form\Type\PlaceType;
 use App\Repository\PlaceRepository;
@@ -35,19 +36,31 @@ class PlaceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $name = $place->getName();
             $street = $place->getAddress();
             $city = $place->getCity();
             $country = $place->getCountry();
 
             $currentAddress = $this->getGoogleAddress($name, $street, $city, $country);
-            $place->setAddress($currentAddress->getStreetAddress() . ' ' . $currentAddress->getStreetNumber());
-            $place->setCity($currentAddress->getLocality());
-            $place->setPostalCode($currentAddress->getPostalCode());
-            $place->setLongitude($currentAddress->getCoordinates()->getLongitude());
-            $place->setLatitude($currentAddress->getCoordinates()->getLatitude());
-            $place->setCountry($currentAddress->getCountry());
+            if($currentAddress->getStreetAddress() && $currentAddress->getStreetAddress()) {
+                $place->setAddress($currentAddress->getStreetAddress() . ' ' . $currentAddress->getStreetNumber());
+            }
+            if($currentAddress->getLocality()) {
+                $place->setCity($currentAddress->getLocality());
+            }
+
+            if($currentAddress->getPostalCode()) {
+                $place->setPostalCode($currentAddress->getPostalCode());
+            }
+
+            if($currentAddress->getCoordinates()) {
+                $place->setLongitude($currentAddress->getCoordinates()->getLongitude());
+                $place->setLatitude($currentAddress->getCoordinates()->getLatitude());
+            }
+
+            if($currentAddress->getCountry()) {
+                $place->setCountry($currentAddress->getCountry());
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($place);
@@ -102,6 +115,7 @@ class PlaceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->savePlaceData($place);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('place_show', [
@@ -238,11 +252,9 @@ class PlaceController extends AbstractController
             $imageFile = $image->getImageFile();
             if ($imageFile) {
                 $imageName = md5(uniqid()) . '.' . $imageFile->guessExtension();
-                $imageFile->move(
-                    $this->getParameter('placeImage_directory'),
-                    $imageName
-                );
                 $image->setImageName($imageName);
+                $em->persist($image);
+                $em->flush();
             }
         }
         $em->persist($place);

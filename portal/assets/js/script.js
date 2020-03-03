@@ -66,55 +66,67 @@ function error(){
     initMapPlace();
 }
 
-
-
 var $collectionHolder;
 // setup an "add a Image" link
 var $addImageLink = $('<a href="#" class="add_Image_link col-sm-10">Add a Image</a>');
 var $newLinkLi = $('<div class="form-group"><div class="col-sm-2"></div></div>').append($addImageLink);
 
 jQuery(document).ready(function() {
-    // Get the ul that holds the collection of Images
-    $collectionHolder = $('div.images');
+    $('.add-another-collection-widget').click(function (e) {
+        var list = $($(this).attr('data-list-selector'));
+        // Try to find the counter of the list or use the length of the list
+        var counter = list.data('widget-counter') | list.children().length;
 
-    $collectionHolder.find('images_list').each(function() {
-        addTagFormDeleteLink($(this));
+        // grab the prototype template
+        var newWidget = list.attr('data-prototype');
+        // replace the "__name__" used in the id and name of the prototype
+        // with a number that's unique to your emails
+        // end name attribute looks like name="contact[emails][2]"
+        newWidget = newWidget.replace(/__name__/g, counter);
+        // Increase the counter
+        counter++;
+        // And store it, the length cannot be used if deleting widgets is allowed
+        list.data('widget-counter', counter);
+
+        // create a new list element and add it to the list
+        var newElem = $(list.attr('data-widget-tags')).html(newWidget);
+        newElem.appendTo(list);
     });
 
-    // add the "add a Image" anchor and li to the Images ul
-    $collectionHolder.append($newLinkLi);
+    $('.place_slider').slick(
+        {
+            autoplay: true,
+            centerMode: true,
+            centerPadding: '60px',
+            slidesToShow: 3,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 3
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        arrows: false,
+                        centerMode: true,
+                        centerPadding: '40px',
+                        slidesToShow: 1
+                    }
+                }
+            ]
+        }
+    );
 
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
-    $collectionHolder.data('index', $collectionHolder.find(':input').length);
-
-    $addImageLink.on('click', function(e) {
-        // prevent the link from creating a "#" on the URL
-        e.preventDefault();
-
-        // add a new Image form (see next code block)
-        addImageForm($collectionHolder, $newLinkLi);
-    });
 });
 
-function addImageForm($collectionHolder, $newLinkLi) {
-    // Get the data-prototype explained earlier
-    var prototype = $collectionHolder.data('prototype');
 
-    // get the new index
-    var index = $collectionHolder.data('index');
 
-    // Replace '__name__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    var newForm = prototype.replace(/__name__/g, index);
 
-    // increase the index with one for the next item
-    $collectionHolder.data('index', index + 1);
-
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<div class="images_list"></div>').append(newForm);
-    $newLinkLi.before($newFormLi);
-}
 window.initMap = initMap;
 
 $(document).on('ready', function() {

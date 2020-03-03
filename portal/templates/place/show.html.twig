@@ -5,16 +5,19 @@
 {% block teaserImage %}
     <div class="jumbotron">
         <div class="container">
+            <div class="place_slider">
+            {% for image in place.images %}
+                <div>
+                    <img src="{{ image.imageUrl }}" alt="{{ place.name }}">
+                </div>
+            {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}
 {% block body %}
-    <section class="place_slider">
-        {% for image in place.images %}
-            <div>
-                <img src="{{ image.imageUrl }}" alt="{{ place.name }}">
-            </div>
-        {% endfor %}
+    <section>
+
     </section>
     <div class="container place">
         <div>
