@@ -4,6 +4,8 @@ namespace App\Form\Type;
 use App\Entity\Place;
 use App\Entity\Image;
 use DateTime;
+use Karser\Recaptcha3Bundle\Form\Recaptcha3Type;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3;
 use Sonata\CoreBundle\Form\Type\BooleanType;
 use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
@@ -49,6 +51,10 @@ class PlaceType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
             ))
+            ->add('captcha', Recaptcha3Type::class, [
+                'constraints' => new Recaptcha3(),
+                'action_name' => 'placeAdd',
+            ])
             ->add('save', SubmitType::class, array(
                 'attr' => array('class' => 'save'),
             ));
