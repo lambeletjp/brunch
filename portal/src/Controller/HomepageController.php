@@ -9,6 +9,8 @@
 namespace App\Controller;
 
 use App\Entity\Place;
+use App\Entity\QuickPlace;
+use App\Form\Type\QuickPlaceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -24,7 +26,20 @@ class HomepageController extends AbstractController
      */
     public function indexAction(Request $request)
     {
+        $place = new QuickPlace;
+        $quickForm = $this->createForm(
+            QuickPlaceType::class,
+            $place,
+            ['action' => $this->generateUrl('quick_add_location')]
+        );
+
         $places = $this->getDoctrine()->getRepository(Place::class)->findBy(['approved' => 1],['id' => 'DESC'],10);
-        return $this->render('homepage/homepage.html.twig',['places' => $places]);
+        return $this->render(
+            'homepage/homepage.html.twig',
+            [
+                'places' => $places,
+                'quickForm' => $quickForm->createView()
+            ]
+        );
     }
 }

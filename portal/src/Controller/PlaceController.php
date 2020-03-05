@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Place;
+use App\Entity\QuickPlace;
 use App\Form\Type\PlaceType;
+use App\Form\Type\QuickPlaceType;
 use App\Repository\PlaceRepository;
 use Geocoder\Provider\GoogleMaps\Model\GoogleAddress;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -183,35 +185,50 @@ class PlaceController extends AbstractController
         \Swift_Mailer $mailer
     )
     {
-        $name = $request->get('name');
-        $street = $request->get('street');
-        $city = $request->get('city');
-        $country = $request->get('country');
+        $place = new QuickPlace;
+        $quickForm = $this->createForm(
+            QuickPlaceType::class,
+            $place,
+            ['action' => $this->generateUrl('quick_add_location')]
+        );
 
-        $currentAddress = $this->getGoogleAddress($name, $street, $city, $country);
+        $quickForm->handleRequest($request);
 
-        if(!$currentAddress){
-            if(!$currentAddress) {
-                $this->addFlash(
-                    'notice',
-                    'No place was found with the adresse : ' . $address
-                );
-                return $this->redirectToRoute($this->generateUrl('homepage'));
+        if ($quickForm->isSubmitted() && $quickForm->isValid()) {
+            $quickPlace = $quickForm->getData();
+
+
+            $name = $quickPlace->getName();
+            $street = $quickPlace->getStreet();
+            $city = $quickPlace->getCity();
+            $country = $quickPlace->getCountry();
+
+            $currentAddress = $this->getGoogleAddress($name, $street, $city, $country);
+
+            if (!$currentAddress) {
+                if (!$currentAddress) {
+                    $this->addFlash(
+                        'notice',
+                        'No place was found with the adresse : ' . $address
+                    );
+                    return $this->redirect($this->generateUrl('homepage'));
+                }
             }
+
+            $place = new Place();
+            $place->setName($name);
+            $place->setAddress($currentAddress->getStreetAddress() . ' ' . $currentAddress->getStreetNumber());
+            $place->setCity($currentAddress->getLocality());
+            $place->setPostalCode($currentAddress->getPostalCode());
+            $place->setLongitude($currentAddress->getCoordinates()->getLongitude());
+            $place->setLatitude($currentAddress->getCoordinates()->getLatitude());
+            $place->setCountry($currentAddress->getCountry());
+
+            $place = $this->savePlaceData($place);
+            $this->sendNotificationNewPlace($mailer);
+            return $this->redirect($this->generateUrl('place_edit', ['slug' => $place->getSlug(), 'id' => $place->getId()]));
         }
-
-        $place = new Place();
-        $place->setName($name);
-        $place->setAddress($currentAddress->getStreetAddress() . ' ' . $currentAddress->getStreetNumber());
-        $place->setCity($currentAddress->getLocality());
-        $place->setPostalCode($currentAddress->getPostalCode());
-        $place->setLongitude($currentAddress->getCoordinates()->getLongitude());
-        $place->setLatitude($currentAddress->getCoordinates()->getLatitude());
-        $place->setCountry($currentAddress->getCountry());
-
-        $place = $this->savePlaceData($place);
-        $this->sendNotificationNewPlace($mailer);
-        return $this->redirect($this->generateUrl('place_edit',['slug' => $place->getSlug(), 'id' => $place->getId()]));
+        return $this->redirect($this->generateUrl('homepage'));
     }
 
     private function sendNotificationNewPlace(\Swift_Mailer $mailer)

@@ -21,42 +21,20 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
-class PlaceType extends AbstractType
+class QuickPlaceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class)
-            ->add('address', TextType::class)
-            ->add('postalCode', NumberType::class)
+            ->add('street', TextType::class)
             ->add('city', TextType::class)
             ->add('country', TextType::class)
-            ->add('priceStart', MoneyType::class, array(
-                    'required' => false
-                ))
-            ->add('priceEnd', MoneyType::class, array(
-                'required' => false
-            ))
-            ->add('hasBuffet', CheckboxType::class, array(
-                'required' => false
-            ))
-            ->add('weekStart', TimeType::class, array('widget'=> 'single_text', 'required' => false))
-            ->add('weekStop', TimeType::class, array('widget'=> 'single_text', 'required' => false))
-            ->add('saturdayStart', TimeType::class, array('widget'=> 'single_text', 'required' => false))
-            ->add('saturdayStop', TimeType::class, array('widget'=> 'single_text', 'required' => false))
-            ->add('sundayStart', TimeType::class, array('widget'=> 'single_text', 'required' => false))
-            ->add('sundayStop', TimeType::class, array('widget'=> 'single_text', 'required' => false))
-            ->add('images', CollectionType::class, array(
-                'entry_type' => ImageType::class,
-                'allow_add' => true,
-                'by_reference' => false,
-                'allow_delete' => true,
-            ))
             ->add('captcha', Recaptcha3Type::class, [
                 'constraints' => new Recaptcha3(),
                 'action_name' => 'placeAdd',
             ])
             ->add('save', SubmitType::class, array(
-                'attr' => array('class' => 'save btn btn-primary'),
+                'attr' => array('class' => 'save btn btn-primary')
             ));
     }
 
