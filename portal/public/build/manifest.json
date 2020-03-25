@@ -1,0 +1,14 @@
+{
+  "build/app.css": "/build/app.css",
+  "build/app.js": "/build/app.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/fonts/slick.woff": "/build/fonts/slick.b7c9e1e4.woff",
+  "build/fonts/slick.eot": "/build/fonts/slick.ced611da.eot",
+  "build/fonts/slick.ttf": "/build/fonts/slick.d41f55a7.ttf",
+  "build/header/brunchHeader.jpg": "/build/header/brunchHeader.jpg",
+  "build/header/header.png": "/build/header/header.png",
+  "build/header/logo.svg": "/build/header/logo.svg",
+  "build/images/ajax-loader.gif": "/build/images/ajax-loader.c5cd7f53.gif",
+  "build/images/brunchHeader.jpg": "/build/images/brunchHeader.5ced5581.jpg",
+  "build/images/slick.svg": "/build/images/slick.f97e3bbf.svg"
+}
