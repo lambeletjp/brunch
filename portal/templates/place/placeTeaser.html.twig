@@ -3,7 +3,7 @@
         <div>
             {%  set image = place.imageTeaser %}
             {% if image %}
-                <img src={{image.imageUrl | imagine_filter('place_teaser')}}>
+                <img src={{ image.imageUrl }}>
             {% endif %}
             <div class="place-description">
                 <h4>{{ place.name }}</h4>
