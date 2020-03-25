@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Place index{% endblock %}
+
+{% block body %}
+    <h1>Place index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>PostalCode</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Siteweb</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>HasBuffet</th>
+                <th>saturdayStart</th>
+                <th>saturdayStop</th>
+                <th>SundayStart</th>
+                <th>SundayStop</th>
+                <th>WeekStart</th>
+                <th>WeekStop</th>
+                <th>PriceStart</th>
+                <th>PriceEnd</th>
+                <th>IsApproved</th>
+                <th>UpdatedAt</th>
+                <th>CreatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for place in places %}
+            <tr>
+                <td>{{ place.id }}</td>
+                <td>{{ place.name }}</td>
+                <td>{{ place.address }}</td>
+                <td>{{ place.postalCode }}</td>
+                <td>{{ place.city }}</td>
+                <td>{{ place.country }}</td>
+                <td>{{ place.siteweb }}</td>
+                <td>{{ place.latitude }}</td>
+                <td>{{ place.longitude }}</td>
+                <td>{{ place.hasBuffet ? 'Yes' : 'No' }}</td>
+                <td>{{ place.saturdayStart ? place.saturdayStart|date('H:i:s') : '' }}</td>
+                <td>{{ place.saturdayStop ? place.saturdayStop|date('H:i:s') : '' }}</td>
+                <td>{{ place.sundayStart ? place.sundayStart|date('H:i:s') : '' }}</td>
+                <td>{{ place.sundayStop ? place.sundayStop|date('H:i:s') : '' }}</td>
+                <td>{{ place.weekStart ? place.weekStart|date('H:i:s') : '' }}</td>
+                <td>{{ place.weekStop ? place.weekStop|date('H:i:s') : '' }}</td>
+                <td>{{ place.priceStart }}</td>
+                <td>{{ place.priceEnd }}</td>
+                <td>{{ place.isApproved ? 'Yes' : 'No' }}</td>
+                <td>{{ place.updatedAt ? place.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ place.createdAt ? place.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('place_show', {'id': place.id, 'slug': place.slug }) }}">show</a>
+                    <a href="{{ path('place_edit', {'id': place.id, 'slug': place.slug }) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('place_new') }}">Create new</a>
+{% endblock %}

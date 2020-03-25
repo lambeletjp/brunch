@@ -1,0 +1,14 @@
+<div class="col-xs-12 col-sm-6 col-lg-3 col-md-3 place-teaser">
+    <a href="{{ path('place_show', {'slug': place.slug,'id': place.id}) }}">
+        <div>
+            {%  set image = place.imageTeaser %}
+            {% if image %}
+                <img src={{image.imageUrl | imagine_filter('place_teaser')}}>
+            {% endif %}
+            <div class="place-description">
+                <h4>{{ place.name }}</h4>
+                <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city}}</p>
+            </div>
+        </div>
+    </a>
+</div>

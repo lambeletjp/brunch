@@ -1,0 +1,112 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+
+{% block title %}Brunch{% endblock %}
+{% block teaserImage %}
+    <div class="jumbotron">
+        <div class="container">
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    <section class="place_slider">
+        {% for image in place.images %}
+            <div>
+                <img src="{{ image.imageUrl }}">
+            </div>
+        {% endfor %}
+    </section>
+
+    {% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+    <div class="container">
+        {{ form_start(form) }}
+        {{ form_widget(form._token) }}
+        <div class="row">
+            <div class="col-xs-12 col-sm-4 col-md-3">
+                {% include 'AppBundle:Place:mapPlace.html.twig' %}
+            </div>
+            <div class="col-xs-12 col-sm-5 col-md-6">
+                <h1>{{ place.name }}</h1>
+                <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6">
+                <h3 class="main-title">Informations</h3>
+                <div class="row">
+                    <div class="col-xs-12">
+                        {{ form_widget(form.hasBuffet) }}
+                    </div>
+                    <div class="col-xs-12">
+                        <h4>Prices range</h4>
+                    </div>
+                    <div class="col-xs-2">
+                        <label>From</label>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_widget(form.priceStart) }}
+                    </div>
+                    <div class="col-xs-1">
+                        <label>To</label>
+                    </div>
+                    <div class="col-xs-4">
+                        {{ form_widget(form.priceEnd) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <h3 class="main-title">Brunch times</h3>
+                <div class="row">
+                    <div class="col-xs-0 col-sm-6">
+                        <h4>Begin</h4>
+                    </div>
+                    <div class="col-xs-0 col-sm-6">
+                        <h4>End</h4>
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <h5>During the week</h5>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.weekStart) }}
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.weekStop) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <h5>Saturday</h5>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.saturdayStart) }}
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.saturdayStop) }}
+                    </div>
+                    <div class="col-xs-12 col-sm-12">
+                        <h5>Sunday</h5>
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.sundayStart) }}
+                    </div>
+                    <div class="col-xs-6 col-sm-6">
+                        {{ form_widget(form.sundayStop) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form_widget(form.save) }}
+    </div>
+
+
+    <div class="imageForm container place">
+        <div class="row">
+            <div class="col-xs-12 main-title"><h2>Images</h2></div>
+            {% form_theme imageForm 'bootstrap_3_horizontal_layout.html.twig' %}
+            {{ form_start(imageForm) }}
+            <div class="col-sm-4">{{ form_widget(imageForm.imageFile) }}</div>
+            <div class="col-sm-3">{{ form_widget(imageForm.save,{ 'label': 'Add an image' }) }}</div>
+            {{ form_end(imageForm) }}
+        </div>
+    </div>
+{% endblock %}

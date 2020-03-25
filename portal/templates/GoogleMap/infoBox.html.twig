@@ -1,0 +1,14 @@
+<div id="googleinfobox">
+    <a href="{{ path('place_show', {'slug': place.slug,'id': place.id}) }}">
+        <h3 id="firstHeading" class="firstHeading">{{ place.name }}</h3>
+        <div id="bodyContent">
+            {% set image = place.imageTeaser %}
+            {% if image %}
+                <img src={{ image.imageUrl }}>
+            {% endif %}
+            <div class="place-description">
+                <p>{{ place.address ~ ' ' ~ place.postalCode ~ ' ' ~ place.city }}</p>
+            </div>
+        </div>
+    </a>
+</div>

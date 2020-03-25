@@ -1,0 +1,16 @@
+{% block _place_images_widget %}
+    <ul id="product-images-fields-list"
+        data-prototype="{{ form_widget(prototype)|e }}"
+        data-widget-tags="{{ '<li></li>'|e }}"
+        data-widget-counter="{{ value|length }}"
+    >
+        {% for key,imageForm in form.children %}
+            {{ form_widget(imageForm) }}
+
+        {% endfor %}
+    </ul>
+
+    <button type="button"
+            class="add-another-collection-widget"
+            data-list-selector="#product-images-fields-list">Add another Image</button>
+{% endblock %}
