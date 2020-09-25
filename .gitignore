@@ -24,3 +24,7 @@ web/uploads/*
 /portal/phpunit.xml
 ###< symfony/phpunit-bridge ###
 
+####docker
+logs/nginx/*
+database/data/*
+
